@@ -18,8 +18,7 @@ class ApplicationController < ActionController::Base
   before_action :show_pending_achievement_notifications!
   before_action :apply_dev_override_ref
   before_action :allow_profiler
-  before_action :bullet_for_admins
-
+  
   # Track who makes changes in PaperTrail
   def user_for_paper_trail
     current_user&.id
@@ -206,11 +205,6 @@ class ApplicationController < ActionController::Base
     if current_user&.admin? || Rails.env.development?
       Rack::MiniProfiler.authorize_request
     end
-  end
-
-  def bullet_for_admins
-    return unless defined?(Bullet)
-    Bullet.add_footer = current_user&.admin? || Rails.env.development?
   end
 
   def refresh_identity_on_portal_return
