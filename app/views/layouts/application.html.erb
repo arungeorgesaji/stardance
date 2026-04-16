@@ -14,7 +14,7 @@
 
     <% og_title = content_for?(:og_title) ? yield(:og_title) : (content_for?(:title) ? "#{yield(:title)} - Flavortown" : "Flavortown - Hack Club") %>
     <% og_description = content_for?(:og_description) ? yield(:og_description) : "Build projects, earn cookies, get prizes. A Hack Club program for teen coders." %>
-    <% og_image = content_for?(:og_image) ? yield(:og_image) : image_url("landing/hero/long-image.avif") %>
+    <% og_image = content_for?(:og_image) ? yield(:og_image) : image_url("landing/space/moon-opp.png") %>
     <% og_url = content_for?(:og_url) ? yield(:og_url) : request.original_url %>
     <% twitter_card = content_for?(:twitter_card) ? yield(:twitter_card) : "summary" %>
 
@@ -33,8 +33,7 @@
     <%= csp_meta_tag %>
     <meta name="turbo-prefetch" content="false">
 
-    <%= preload_link_tag image_path("landing/hero/long-image.avif"), as: "image", fetchpriority: "high" %>
-    <%= preload_link_tag image_path("landing/hero/hero-bg.avif"), as: "image" %>
+    <%= preload_link_tag image_path("landing/space/moon-opp.png"), as: "image", fetchpriority: "high" if controller_name == "landing" %>
     <%= preload_link_tag asset_path("Roboto.ttf"), as: "font", type: "font/ttf", crossorigin: true %>
 
     <%= yield :head %>

@@ -1,9 +1,6 @@
 class LandingController < ApplicationController
   def index
-    @prizes = Cache::CarouselPrizesJob.fetch
     @hide_sidebar = true
-    @landing_variant = challenger_source? ? "challenger" : "default"
-    @show_opensauce_banner = params[:ref] == "opensauce"
 
     if current_user
       redirect_to kitchen_path

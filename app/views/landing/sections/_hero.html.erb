@@ -1,113 +1,39 @@
-<div class="section hero <%= 'hero--challenger' if @landing_variant == 'challenger' %>" role="main" <%= 'data-controller="challenger-stars"' if @landing_variant == 'challenger' %>>
-  <% if @landing_variant == "challenger" %>
-    <div class="hero-mars" aria-hidden="true">
-      <%= image_tag "launch/Mask group.png", alt: "" %>
-    </div>
-  <% end %>
-  <%= inline_svg_tag "landing/hero/flag-orpheus-top.svg", class: "orph-flag" %>
-
-<%
-=begin
-%>
- <div class="login-btn">
-    <%= form_tag "/auth/hack_club", method: :post, data: { turbo: false } do %>
-      <button class="btn btn--red btn--striped">
-        <div>
-          <%= image_tag image_url("mask/enter.avif"), width: 20, height: 20, alt: "" %>
-          Sign in!
-        </div>
-      </button>
-    <% end %>
-
-    <% if current_user&.admin? %>
-      <%= link_to "/admin", class: "btn-striped-red is_admin" do %>
-        <div>Admin</div>
-      <% end %>
-    <% end %>
-  </div>
-<%
-=end
-%>
-
-  <% if @show_opensauce_banner %>
-    <button class="open-sauce" data-controller="modal" data-modal-target-value="opensauce-modal" data-action="click->modal#open">
-      <%= image_tag "opensauce_left.avif", alt: "William Osman's Coke", class: "open-sauce__left-image" %>
-      <h2 class="normal">Hack Club x Open Sauce</h2>
-      <h3>new items <span>available!</span></h3>
-      <%= image_tag "opensauce_right.avif", alt: "William Osman's Coke", class: "open-sauce__right-image" %>
-      <h2 class="only-mobile">&#9432;</h2>
-    </button>
-
-    <dialog id="opensauce-modal" class="modal" data-controller="modal">
-      <h3 class="modal__title" style="border-radius: calc(var(--border-radius)*.6);">Hack Club x Open Sauce</h3>
-      <h4>
-        <p>Hack Club has partnered with Open Sauce to bring you free tickets and travel scholarships to Open Sauce 2026! Join Flavortown today to get them from the shop. Bonus: You can now also buy William Osman's <a href="https://www.youtube.com/watch?v=1qzcum2P1Ko" target="_blank" rel="noopener noreferrer">pirated coke</a>!</p>
-        <%= button_to "Sign up for free stickers", "/auth/hack_club", method: :post, class: "modal__button" %>
-        <%= image_tag "landing-page-opensauce.avif", alt: "Modal Image", class: "modal__image" %>
-      </h4>
-    </dialog>
-  <% end %>
-
-  <% unless @landing_variant == "challenger" %>
-    <div class="top-collab">
-      <%= image_tag image_url("landing/hero/hc-gh-collab.avif"), loading: "lazy", decoding: "async", alt: "Hack Club + Github" %>
-    </div>
-  <% end %>
-
-  <div class="rsvp-container">
-    <% if @landing_variant == "challenger" %>
-      <div class="challenger-logo-combo">
-        <%= image_tag image_url("landing/hero/logo.avif"), loading: "eager", decoding: "async", class: "challenger-logo-flavortown", alt: "Hack Club Flavortown logo" %>
-        <span class="challenger-logo-x">x</span>
-        <%= image_tag image_url("launch/challenger-center-logo.png"), loading: "eager", decoding: "async", class: "challenger-logo-center", alt: "Challenger Center logo" %>
-      </div>
-    <% else %>
-      <%= image_tag image_url("landing/hero/logo.avif"), loading: "eager", decoding: "async", sizes: "(max-width: 600px) 160px, 240px", fetchpriority: "high", alt: "Hack Club Flavortown logo" %>
-    <% end %>
-    <h3>
-      <% if @landing_variant == "challenger" %>
-        Ship a space-related project by April 30th! Submit it to this sidequest to qualify for space-themed prizes in the shop.
-      <% else %>
-        Code personal projects. Win free prizes.
-      <% end %>
-    </h3>
-
-    <div class="rsvp-form">
-      <%= form_with url: submit_email_path, method: :post, local: true do |form| %>
-        <div class="input-red">
-          <div>
-            <%= inline_svg_tag "icons/mail.svg" %>
-            <%= form.email_field :email, placeholder: "Enter your email...", autocomplete: "off", required: true %>
-          </div>
-        </div>
-
-        <%= form.button type: "submit", class: "btn btn--red btn--striped" do %>
-          <div>Get Started</div>
-        <% end %>
-      <% end %>
-      <%= button_to "or, sign back in", "/auth/hack_club", method: :post, form_class: "sign-back-in-link", class: "link-btn" %>
-      <% if Rails.env.development? && current_user.blank? %>
-        <%= button_to "dev login",
-                      "/dev_login",
-                      method: :get,
-                      form_class: "sign-back-in-link",
-                      class: "link-btn" %>
-      <% end %>
-    </div>
-
-    <% if @landing_variant == "challenger" %>
-      <h4>Ages 13-18. Deadline: <u>April 30th</u>.</h4>
-    <% else %>
-      <h4>Ages 13-18. <u>Dec 22</u> to <u>April 30</u>.</h4>
-    <% end %>
-    <h5>19 or older? Get the same prizes by <a href="https://docs.google.com/document/d/e/2PACX-1vRxWWFVm0pr4042oYljyPAdwb5pH7sdRiwfPw4i01PVs436MfiAFJnKtGoyWwRkXIlB6PlIaVyTQbvO/pub" target="_blank">referring teens</a>.</h5>
-
-    <%= image_tag image_url("icons/chevrons-red-down.svg"), class: "carat", size: 48, alt: "" %>
+<section class="hero" role="main">
+  <div class="hero__bg" aria-hidden="true">
+    <%= image_tag "landing/space/moon-opp.png", class: "hero__bg-overlay", alt: "" %>
   </div>
 
-  <% if @landing_variant == "challenger" %>
-    <%= image_tag image_url("launch/Group 313.png"), class: "hero-art hero-art--challenger", loading: "eager", decoding: "async", fetchpriority: "high", sizes: "100vw", alt: "Moon surface" %>
-  <% else %>
-    <%= image_tag image_url("landing/hero/long-image.avif"), class: "hero-art", loading: "eager", decoding: "async", fetchpriority: "high", sizes: "100vw", alt: "Heidi and Orpheus cooking up a storm" %>
-  <% end %>
-</div>
+  <nav class="hero__nav">
+    <%= image_tag "landing/space/stardance.png", class: "hero__nav-logo", alt: "Stardance Challenge" %>
+    <div class="hero__nav-sponsors">
+      <%= image_tag "landing/space/hackclub.png", alt: "Hack Club", class: "hero__nav-sponsor" %>
+      <span class="hero__nav-sponsor-divider" aria-hidden="true">|</span>
+      <%= image_tag "landing/space/nasa.png", alt: "NASA", class: "hero__nav-sponsor" %>
+      <span class="hero__nav-sponsor-divider" aria-hidden="true">|</span>
+      <%= image_tag "landing/space/amd.png", alt: "AMD", class: "hero__nav-sponsor hero__nav-sponsor--amd" %>
+    </div>
+  </nav>
+
+  <div class="hero__content">
+    <p class="hero__eyebrow">For teens (13&ndash;18):</p>
+    <h1 class="hero__heading">Build something out of this world.</h1>
+    <p class="hero__subtext">The largest STEM challenge of the summer &mdash; code personal projects and win free prizes.</p>
+
+    <div class="hero__rsvp">
+      <%= render "landing/rsvp_form", rsvp: nil %>
+    </div>
+
+    <p class="hero__disclaimer"><em>For all teens aged 13&ndash;18.</em></p>
+  </div>
+
+  <div class="hero__art" aria-hidden="true">
+    <div class="hero__art-photo hero__art-photo--top">
+      <%= image_tag "landing/space/juice.png", alt: "", class: "hero__art-photo-img" %>
+    </div>
+    <div class="hero__art-photo hero__art-photo--bottom">
+      <%= image_tag "landing/space/reem.png", alt: "", class: "hero__art-photo-img" %>
+    </div>
+    <%= image_tag "landing/space/val's-probe.png", class: "hero__art-spacecraft", alt: "" %>
+    <%= image_tag "landing/space/jeb's-station.png", class: "hero__art-satellite", alt: "" %>
+  </div>
+</section>

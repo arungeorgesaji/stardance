@@ -1,6 +1,6 @@
 <div id="rsvp-form" class="rsvp-form">
   <% if defined?(success_message) && success_message %>
-    <div class="success">
+    <div class="rsvp-form__success">
       <%= success_message %>
 
       <%= dev_tool do %>
@@ -10,25 +10,18 @@
       <% end %>
     </div>
   <% elsif defined?(error_message) && error_message %>
-    <div class="error">
+    <div class="rsvp-form__error">
       <%= error_message %>
     </div>
   <% end %>
 
   <% unless defined?(success_message) && success_message %>
-    <%= form_with model: rsvp || Rsvp.new, url: rsvps_path, local: false do |form| %>
+    <%= form_with model: rsvp || Rsvp.new, url: rsvps_path, local: false, class: "rsvp-form__row" do |form| %>
       <%= hidden_field_tag :ref, params[:ref] %>
-      <div class="input-red">
-        <div>
-          <%= inline_svg_tag "icons/mail.svg" %>
-          <%= form.email_field :email, placeholder: "Enter your email...", autocomplete: "off" %>
-        </div>
-      </div>
-
-      <%= form.button type: "submit", class: "btn btn--red btn--striped" do %>
-        <div>RSVP to get notified on launch</div>
+      <%= form.email_field :email, placeholder: "jebediah@hackclub.com", autocomplete: "off", class: "rsvp-form__input" %>
+      <%= form.button type: "submit", class: "rsvp-form__submit" do %>
+        RSVP &rarr;
       <% end %>
-
     <% end %>
   <% end %>
 </div>

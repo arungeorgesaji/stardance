@@ -1,50 +1,21 @@
-<div class="how-this-works-second-border-wrapper">
-  <div class="how-this-works-border-wrapper">
-    <div class="section how-this-works">
-      <div class="title-overlay">
-        <div class="ribbon ribbon-title title">How this works</div>
+<section class="how-it-works">
+  <%= image_tag "landing/space/nebula-bg.png", class: "how-it-works__bg", alt: "", aria_hidden: "true" %>
+
+  <h2 class="how-it-works__heading">How it works</h2>
+
+  <div class="how-it-works__cards">
+    <div class="how-it-works__card-wrapper how-it-works__card-wrapper--1">
+      <div class="how-it-works__card">
+        <h3 class="how-it-works__card-title">Build projects</h3>
+        <p class="how-it-works__card-body">Build websites, games, apps, electronics, or any other open-source project that can be shared to showcase your skill.</p>
       </div>
+    </div>
 
-      <div class="step left">
-        <div class="step-card">
-            <div class="step-hero">
-              <%= image_tag "landing/how-this-works/step-1-img.avif", alt: "" %>
-              <div class="title">Cook a real tasty project!</div>
-            </div>
-
-            <p>Make a website, game, hardware project, or anything your heart desires!</p>
-
-            <%= inline_svg_tag "icons/arrow-red-right.svg", class: "right" %>
-        </div>
-      </div>
-
-      <div class="step center">
-        <div class="step-card">
-            <%= inline_svg_tag "icons/arrow-green-right.svg", class: "left" %>
-
-            <div class="step-hero">
-              <%= image_tag "landing/how-this-works/step-2-img.avif", alt: "" %>
-              <div class="title">Ship the project!</div>
-            </div>
-
-            <p>Share your project for others to experience and to get cookies - our virtual currency!</p>
-
-            <%= inline_svg_tag "icons/arrow-green-right.svg", class: "right" %>
-        </div>
-      </div>
-
-      <div class="step right">
-        <div class="step-card">
-            <%= inline_svg_tag "icons/arrow-blue-right.svg", class: "left" %>
-
-            <div class="step-hero">
-              <%= image_tag "landing/how-this-works/step-3-img.avif", alt: "" %>
-              <div class="title">Get free stuff!</div>
-            </div>
-
-            <p>Exchange your cookies for iPads, MacBooks, Raspberry Pis and so many more things - all for free!</p>
-        </div>
+    <div class="how-it-works__card-wrapper how-it-works__card-wrapper--2">
+      <div class="how-it-works__card">
+        <h3 class="how-it-works__card-title">Earn prizes</h3>
+        <p class="how-it-works__card-body">Redeem your stars for awesome prizes like raspberry pis, server hosting, 3d printers, and more to fuel your next creation.</p>
       </div>
     </div>
   </div>
-</div>
+</section>
