@@ -6,8 +6,11 @@
   <%= stylesheet_link_tag "landing", "data-turbo-track": "reload" %>
 <% end %>
 
-<%= render "landing/sections/header" %>
-<%= render "landing/sections/hero" %>
+<div class="hero-header-wrapper">
+  <div class="hero__left-gradient" aria-hidden="true"></div>
+  <%= render "landing/sections/header" %>
+  <%= render "landing/sections/hero" %>
+</div>
 
 <%= render "landing/sections/project_thumbnails" %>
 

@@ -29,7 +29,7 @@
 
     @media (max-width: 600px) {
       margin-left: var(--space-l);
-      margin-top: 120px;
+      margin-top: 40px;
       max-width: calc(100vw - 3rem);
     }
 
@@ -40,6 +40,10 @@
       // Roughly tracks the "Build something" headline width.
       max-width: clamp(343px, 36vw, 750px);
       gap: 0.6rem;
+
+      @media (max-width: 600px) {
+        max-width: 100%;
+      }
 
       &__row {
         display: flex;
@@ -118,6 +122,31 @@
   line-height: 1.4;
 }
 
+@media (max-width: 600px) {
+  .hero .rsvp-container {
+    min-width: 0;
+  }
+
+  .hero .rsvp-form .carat {
+    align-self: center;
+    margin-right: 0;
+  }
+
+  .hero__headline {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    font-size: clamp(36px, 11vw, 44px);
+
+    span {
+      white-space: normal !important;
+      max-width: 100%;
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+  }
+}
+
 // Star doodle: sits on the RSVP button, left arm dangling into the email
 // input as a checkmark (Figma match).
 .hero__doodle-arrow {
@@ -128,6 +157,10 @@
   top: -56px;
   pointer-events: none;
   z-index: 2;
+
+  @media (max-width: 600px) {
+  right: 20px;
+  }
 }
 
 .hero__caption {
@@ -138,6 +171,11 @@
   margin: 0.6em 0 0;
   align-self: flex-start;
   text-align: left;
+}
+
+// Wrapper that lets the left-gradient span header + hero.
+.hero-header-wrapper {
+  position: relative;
 }
 
 // Dark left gradient ensures text readability over the NASA photo.
@@ -154,7 +192,6 @@
   );
   z-index: 0;
   pointer-events: none;
-  padding-bottom: 25%;
 }
 
 // NASA hero photo — right side of hero.

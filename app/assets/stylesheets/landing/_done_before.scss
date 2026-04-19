@@ -126,6 +126,11 @@
 
     &__card {
       max-width: 100%;
+      width: min(376px, 100%);
+
+      &:nth-child(1),
+      &:nth-child(2),
+      &:nth-child(3) { flex: 0 0 auto; }
     }
   }
 }

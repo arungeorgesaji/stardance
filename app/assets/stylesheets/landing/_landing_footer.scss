@@ -93,6 +93,7 @@
   &__logo {
     width: clamp(180px, 18vw, 229px);
     height: auto;
+    aspect-ratio: 1086 / 512;
   }
 
   &__links {
@@ -163,15 +164,18 @@
   }
 
   @media (max-width: 900px) {
-    &__top-row {
-      flex-direction: column;
-    }
-    &__links {
-      text-align: left;
-    }
+    overflow: visible;
+
+    &__top-row { flex-direction: column; gap: var(--space-l); }
+    &__links { text-align: left; }
     &__content {
-      padding: 0 1.5rem clamp(4rem, 10vw, 8rem);
+      position: relative;
+      inset: auto;
+      padding: 2rem 1.5rem 4rem;
+      transform: none;
+      width: 100%;
     }
+    &__scene { position: relative; }
     &__creature,
     &__rocket {
       display: none;
