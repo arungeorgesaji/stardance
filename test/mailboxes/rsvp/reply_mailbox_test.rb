@@ -1,6 +1,8 @@
 require "test_helper"
 
 class Rsvp::ReplyMailboxTest < ActionMailbox::TestCase
+  include ActionMailer::TestHelper
+
   self.fixture_table_names = []
   self.fixture_sets = {}
   test "reply from a known RSVP stamps reply_confirmed_at" do
@@ -74,5 +76,79 @@ class Rsvp::ReplyMailboxTest < ActionMailbox::TestCase
     end
 
     assert_equal 1, rsvp.replies.count
+  end
+
+  test "first reply starts a tic-tac-toe game with no moves and emails the board" do
+    rsvp = Rsvp.create!(email: "player@example.com")
+
+    assert_enqueued_emails 1 do
+      receive_inbound_email_from_mail \
+        to: "rsvp@stardance.hackclub.com",
+        from: "player@example.com",
+        subject: "Re: welcome",
+        body: "let's play"
+    end
+
+    game = Rsvp::Game.current_for(rsvp)
+    assert_not_nil game
+    assert_equal 0, game.move_count
+  end
+
+  test "subsequent reply with a digit plays the user move and a bot move" do
+    rsvp = Rsvp.create!(email: "mover@example.com")
+    Rsvp::Game.start_for(rsvp).update!(move_count: 1, board: "----X----")
+
+    receive_inbound_email_from_mail \
+      to: "rsvp@stardance.hackclub.com",
+      from: "mover@example.com",
+      subject: "Re: tic tac toe",
+      body: "I pick 1\n> quoted board"
+
+    game = Rsvp::Game.current_for(rsvp) || rsvp.games.order(:created_at).last
+    assert_equal "X", game.board[0]
+    assert game.move_count >= 2
+  end
+
+  test "STOP keyword sends the stop email and skips the game" do
+    rsvp = Rsvp.create!(email: "quitter@example.com")
+
+    assert_enqueued_email_with Rsvp::Mailer, :tic_tac_toe_stop, args: [ rsvp ] do
+      receive_inbound_email_from_mail \
+        to: "rsvp@stardance.hackclub.com",
+        from: "quitter@example.com",
+        subject: "Re: welcome",
+        body: "STOP"
+    end
+
+    assert_not_nil rsvp.reload.reply_confirmed_at
+    assert_nil Rsvp::Game.current_for(rsvp)
+  end
+
+  test "first reply enqueues tic_tac_toe_start" do
+    rsvp = Rsvp.create!(email: "starter@example.com")
+
+    receive_inbound_email_from_mail \
+      to: "rsvp@stardance.hackclub.com",
+      from: "starter@example.com",
+      subject: "Re: welcome",
+      body: "let's play"
+
+    game = Rsvp::Game.current_for(rsvp)
+    assert_enqueued_email_with Rsvp::Mailer, :tic_tac_toe_start, args: [ game ]
+  end
+
+  test "winning move enqueues tic_tac_toe_over" do
+    rsvp = Rsvp.create!(email: "winner@example.com")
+    game = Rsvp::Game.start_for(rsvp)
+    game.update!(board: "XX-OO----", move_count: 4)
+
+    receive_inbound_email_from_mail \
+      to: "rsvp@stardance.hackclub.com",
+      from: "winner@example.com",
+      subject: "Re: ttt",
+      body: "3"
+
+    assert_enqueued_email_with Rsvp::Mailer, :tic_tac_toe_over, args: [ game ]
+    assert_predicate game.reload, :user_won?
   end
 end

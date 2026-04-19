@@ -1,0 +1,12 @@
+<mjml>
+  <mj-body background-color="#ffffff">
+    <mj-section padding="24px">
+      <mj-column>
+        <mj-text font-size="15px" line-height="1.5" color="#111111">
+          Game ended.<br/><br/>
+          Reply with any number 1&ndash;9 anytime to start a new one.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

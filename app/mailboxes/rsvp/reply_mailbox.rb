@@ -1,4 +1,6 @@
 class Rsvp::ReplyMailbox < ApplicationMailbox
+  STOP_REGEX = /\bstop\b/i
+
   def process
     sender = mail.from.first.to_s.downcase.strip
     rsvp = Rsvp.find_by(email: sender)
@@ -6,6 +8,12 @@ class Rsvp::ReplyMailbox < ApplicationMailbox
 
     rsvp.confirm_reply!
     persist_reply(rsvp)
+
+    if stop_requested?
+      Rsvp::Mailer.tic_tac_toe_stop(rsvp).deliver_later
+    else
+      advance_game(rsvp)
+    end
   end
 
   private
@@ -17,6 +25,33 @@ class Rsvp::ReplyMailbox < ApplicationMailbox
       reply.body_html   = mail.html_part&.body&.decoded
       reply.received_at = mail.date || Time.current
     end
+  end
+
+  def advance_game(rsvp)
+    game = Rsvp::Game.current_for(rsvp) || Rsvp::Game.start_for(rsvp)
+
+    if game.move_count.zero?
+      Rsvp::Mailer.tic_tac_toe_start(game).deliver_later
+    else
+      cell = parse_cell(extract_text_body)
+      game.play_user_move(cell) if cell
+      mailer_action = game.in_progress? ? :tic_tac_toe_move : :tic_tac_toe_over
+      Rsvp::Mailer.public_send(mailer_action, game).deliver_later
+    end
+  end
+
+  def stop_requested?
+    extract_text_body.to_s.match?(STOP_REGEX)
+  end
+
+  def parse_cell(body)
+    first_line = (body || "").lines.find { |l| !quoted?(l) && l.strip.match?(/\d/) }
+    digit = first_line&.scan(/[1-9]/)&.first
+    digit && (digit.to_i - 1)
+  end
+
+  def quoted?(line)
+    line.start_with?(">") || line.match?(/^On .+ wrote:/)
   end
 
   def extract_text_body

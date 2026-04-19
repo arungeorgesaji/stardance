@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_19_202945) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_19_230221) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "vector"
@@ -518,6 +518,17 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_19_202945) do
     t.index ["token"], name: "index_report_review_tokens_on_token", unique: true
   end
 
+  create_table "rsvp_games", force: :cascade do |t|
+    t.string "board", default: "---------", null: false
+    t.datetime "created_at", null: false
+    t.integer "move_count", default: 0, null: false
+    t.bigint "rsvp_id", null: false
+    t.integer "status", default: 0, null: false
+    t.datetime "updated_at", null: false
+    t.index ["rsvp_id", "status"], name: "index_rsvp_games_on_rsvp_id_and_status"
+    t.index ["rsvp_id"], name: "index_rsvp_games_on_rsvp_id"
+  end
+
   create_table "rsvp_replies", force: :cascade do |t|
     t.text "body_html"
     t.text "body_text"
@@ -978,6 +989,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_19_202945) do
   add_foreign_key "project_skips", "users"
   add_foreign_key "projects", "users", column: "marked_fire_by_id"
   add_foreign_key "report_review_tokens", "project_reports", column: "report_id"
+  add_foreign_key "rsvp_games", "rsvps"
   add_foreign_key "rsvp_replies", "rsvps"
   add_foreign_key "shop_card_grants", "shop_items"
   add_foreign_key "shop_card_grants", "users"

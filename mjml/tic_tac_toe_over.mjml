@@ -1,0 +1,19 @@
+<mjml>
+  <mj-body background-color="#ffffff">
+    <mj-section padding="24px">
+      <mj-column>
+        <mj-text font-size="15px" line-height="1.5" color="#111111">
+          {DATA_VARIABLE:outcome}.
+        </mj-text>
+
+        <mj-text font-family="ui-monospace, Menlo, Consolas, monospace" font-size="16px" line-height="1.4" color="#111111" padding="16px 0">
+          <pre style="margin:0;white-space:pre;font-family:ui-monospace,Menlo,Consolas,monospace;">{DATA_VARIABLE:board}</pre>
+        </mj-text>
+
+        <mj-text font-size="15px" line-height="1.5" color="#111111">
+          Reply with any number 1&ndash;9 to start a new game.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>
