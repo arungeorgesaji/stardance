@@ -8,7 +8,7 @@ class Rsvp::ReplyMailboxTest < ActionMailbox::TestCase
     rsvp.update_column(:reply_confirmed_at, nil)
 
     receive_inbound_email_from_mail \
-      to: "stardance+rsvp@hackclub.com",
+      to: "rsvp@stardance.hackclub.com",
       from: "fan@example.com",
       subject: "Re: welcome",
       body: "Hey Stardance"
@@ -21,7 +21,7 @@ class Rsvp::ReplyMailboxTest < ActionMailbox::TestCase
     rsvp.update_column(:reply_confirmed_at, nil)
 
     receive_inbound_email_from_mail \
-      to: "stardance+rsvp@hackclub.com",
+      to: "rsvp@stardance.hackclub.com",
       from: "LOUD@Example.com",
       subject: "Re: welcome",
       body: "hi"
@@ -32,7 +32,7 @@ class Rsvp::ReplyMailboxTest < ActionMailbox::TestCase
   test "reply from an unknown sender is a no-op" do
     assert_nothing_raised do
       receive_inbound_email_from_mail \
-        to: "stardance+rsvp@hackclub.com",
+        to: "rsvp@stardance.hackclub.com",
         from: "stranger@example.com",
         subject: "Re: welcome",
         body: "who?"
