@@ -23,6 +23,8 @@ class Rsvp < ApplicationRecord
   has_paper_trail ignore: [ :ip_address, :user_agent ]
   has_secure_token :confirmation_token
 
+  has_many :replies, class_name: "Rsvp::Reply", dependent: :destroy
+
   validates :email, presence: true,
                     uniqueness: { case_sensitive: false },
                     format: { with: URI::MailTo::EMAIL_REGEXP }

@@ -30,14 +30,49 @@ class Rsvp::ReplyMailboxTest < ActionMailbox::TestCase
   end
 
   test "reply from an unknown sender is a no-op" do
-    assert_nothing_raised do
-      receive_inbound_email_from_mail \
-        to: "rsvp@stardance.hackclub.com",
-        from: "stranger@example.com",
-        subject: "Re: welcome",
-        body: "who?"
+    assert_no_difference -> { Rsvp::Reply.count } do
+      assert_nothing_raised do
+        receive_inbound_email_from_mail \
+          to: "rsvp@stardance.hackclub.com",
+          from: "stranger@example.com",
+          subject: "Re: welcome",
+          body: "who?"
+      end
     end
 
     assert_nil Rsvp.find_by(email: "stranger@example.com")
+  end
+
+  test "reply from a known RSVP persists the reply contents" do
+    rsvp = Rsvp.create!(email: "writer@example.com")
+
+    assert_difference -> { rsvp.replies.count }, 1 do
+      receive_inbound_email_from_mail \
+        to: "rsvp@stardance.hackclub.com",
+        from: "writer@example.com",
+        subject: "Re: welcome",
+        body: "Excited for liftoff!"
+    end
+
+    reply = rsvp.replies.last
+    assert_equal "Re: welcome", reply.subject
+    assert_equal "Excited for liftoff!", reply.body_text
+    assert_not_nil reply.received_at
+  end
+
+  test "duplicate Message-ID does not create a second reply" do
+    rsvp = Rsvp.create!(email: "dupes@example.com")
+    message_id = "<unique-message-id@example.com>"
+
+    2.times do |i|
+      receive_inbound_email_from_mail \
+        to: "rsvp@stardance.hackclub.com",
+        from: "dupes@example.com",
+        subject: "Re: welcome",
+        body: "take #{i}",
+        message_id: message_id
+    end
+
+    assert_equal 1, rsvp.replies.count
   end
 end
