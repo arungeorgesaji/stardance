@@ -106,5 +106,4 @@ class ExploreController < ApplicationController
       end
     end
   end
-
 end
