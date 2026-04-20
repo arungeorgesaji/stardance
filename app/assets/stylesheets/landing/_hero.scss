@@ -206,6 +206,7 @@
   overflow: hidden;
   mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
   -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+  will-change: transform;
 
   &-img {
     display: block;
@@ -222,5 +223,53 @@
   @media (max-width: 600px) {
     width: 70%;
     opacity: 0.4;
+  }
+}
+
+// Earth and moon — float above-left of the spaceship with a parallax depth
+// effect (earth is farthest back, moon middle, spaceship foreground).
+.hero__earth,
+.hero__moon {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
+  will-change: transform;
+  height: auto;
+}
+
+.hero__earth {
+  width: 80px;
+  top: 130px;
+  left: 47%;
+
+  @media (max-width: 900px) {
+    width: 48px;
+    top: 90px;
+    left: 38%;
+  }
+
+  @media (max-width: 600px) {
+    width: 36px;
+    top: 60px;
+    left: 46%;
+  }
+}
+
+.hero__moon {
+  width: 130px;
+  top: 230px;
+  left: 50%;
+
+  @media (max-width: 900px) {
+    width: 90px;
+    top: 160px;
+    left: 32%;
+  }
+
+  @media (max-width: 600px) {
+    width: 64px;
+    top: 110px;
+    left: 40%;
   }
 }

@@ -1,4 +1,7 @@
-<div class="section hero" role="main">
+<div class="section hero" role="main" data-controller="parallax">
+  <%= image_tag image_url("landing/hero/earth.png"), class: "hero__earth", alt: "", data: { parallax_target: "layer", speed: "0.5" } %>
+  <%= image_tag image_url("landing/hero/moon.png"), class: "hero__moon", alt: "", data: { parallax_target: "layer", speed: "0.35" } %>
+
   <div class="rsvp-container">
     <p class="hero__eyebrow">Teens (13–18)</p>
     <h1 class="hero__headline"><span>For coders, builders,</span><span>and <span class="hero__headline--italic">makers</span></span></h1>
@@ -24,7 +27,7 @@
     </div>
   </div>
 
-  <div class="hero__nasa-photo">
+  <div class="hero__nasa-photo" data-parallax-target="layer" data-speed="0.2">
     <%= image_tag image_url("landing/hero/nasa-hero.png"), loading: "eager", fetchpriority: "high", alt: "NASA Orion spacecraft", class: "hero__nasa-photo-img" %>
   </div>
 </div>
