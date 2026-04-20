@@ -18,7 +18,7 @@
     z-index: 0;
 
     @media (max-width: 900px) {
-  top: -40%;
+      top: -40%;
     }
   }
 
@@ -260,9 +260,13 @@
       height: auto;
       min-height: 180px;
 
-      &--peek { display: none; }
+      &--peek {
+        display: none;
+      }
     }
-    &__repeat { display: none; }
+    &__repeat {
+      display: none;
+    }
   }
   position: relative;
 }

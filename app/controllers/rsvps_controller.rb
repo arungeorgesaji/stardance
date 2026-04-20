@@ -17,7 +17,7 @@ class RsvpsController < ApplicationController
 
   def tic_tac
     render plain: <<~TXT, content_type: "text/plain"
-    
+
       you are X. the bot is O. board cells are numbered 1-9:
 
        1 | 2 | 3

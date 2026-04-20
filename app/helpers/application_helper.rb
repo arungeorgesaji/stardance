@@ -185,5 +185,4 @@ module ApplicationHelper
         File.exist?(Rails.root.join("secrets/assets/images", path))
     end
   end
-
 end

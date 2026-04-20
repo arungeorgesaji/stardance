@@ -98,8 +98,12 @@
       transform: translateY(2px);
     }
 
-    &__amd-logo { height: 22px; }
-    &__github-logo { height: 26px; }
+    &__amd-logo {
+      height: 22px;
+    }
+    &__github-logo {
+      height: 26px;
+    }
     z-index: 1;
   }
 }
