@@ -1,5 +1,5 @@
 <% content_for :title, "Educator Toolkit" %>
-<% content_for :og_description, "Resources for teachers to share the Stardance STEM Challenge with their classrooms — free posters, logo, sample copy, and a 2-minute classroom video." %>
+<% content_for :og_description, "Resources for teachers to share the Stardance STEM Challenge with their classrooms — free posters, logo, FAQ, and a 2-minute classroom video." %>
 <% content_for :twitter_card, "summary_large_image" %>
 
 <%= content_for :stylesheets do %>
@@ -10,19 +10,6 @@
 <% video_watch_url    = "#" # 2-minute Stardance overview video %>
 <% patch_request_url  = "#" # Artemis II sewn mission patch request form %>
 
-<% sample_copy = <<~COPY
-  This summer, students ages 13–18 are invited to participate in the Stardance STEM Challenge in partnership with NASA.
-
-  Here's how it works:
-    • Students sign up at stardance.hackclub.com
-    • They pick a coding, electronics, space, or AI project to work on this summer (beginners encouraged)
-    • Each hour they work, they earn tickets to spend in the project supplies shop — where they can get free 3D printers, Raspberry Pi's, trips to NASA, and more
-
-  Show the 2-minute video in your class and get an Artemis II sewn mission patch mailed to you: #{patch_request_url}
-
-COPY
-%>
-
 <div class="educator-toolkit">
   <%= render "landing/sections/header" %>
 
@@ -30,18 +17,6 @@ COPY
     <h1 class="educator-toolkit__title">
       Educator <span class="educator-toolkit__title--italic">Toolkit</span>
     </h1>
-  </section>
-
-  <section class="educator-toolkit__about">
-    <h2 class="educator-toolkit__section-title">What is Stardance?</h2>
-    <div class="educator-toolkit__body">
-      <p>
-        <strong>Stardance</strong> is a <strong>free summer STEM challenge</strong> for teens ages 13–18, run by
-        <a href="https://hackclub.com" target="_blank" rel="noopener">Hack Club</a> in partnership with NASA. Students
-        pick any coding, electronics, space, or AI project they want to build over the summer — beginners are
-        encouraged.
-      </p>
-    </div>
   </section>
 
   <section class="educator-toolkit__resources">
@@ -105,46 +80,66 @@ COPY
     </div>
   </section>
 
-  <section class="educator-toolkit__copy" data-educator-copy>
-    <div class="educator-toolkit__copy-header">
-      <h2 class="educator-toolkit__section-title">Ready-to-use copy</h2>
-      <button type="button"
-              class="educator-toolkit__copy-btn"
-              data-educator-copy-button>
-        Copy to clipboard
-      </button>
+  <section class="educator-toolkit__faq">
+    <h2 class="educator-toolkit__faq-title">FAQ</h2>
+    <div class="educator-toolkit__faq-list">
+      <div class="educator-toolkit__faq-item">
+        <h3 class="educator-toolkit__faq-question">What is Stardance?</h3>
+        <p class="educator-toolkit__faq-answer">
+          Stardance is a free summer STEM challenge for teens ages 13–18, run by
+          <a href="https://hackclub.com" target="_blank" rel="noopener">Hack Club</a>
+          in partnership with NASA. Students pick any technical project they want to build
+          over the summer (coding, hardware, or otherwise) and get free prizes for showing
+          off what they&rsquo;ve made!
+        </p>
+      </div>
+
+      <div class="educator-toolkit__faq-item">
+        <h3 class="educator-toolkit__faq-question">Who is Hack Club?</h3>
+        <p class="educator-toolkit__faq-answer">
+          Founded in 2014, Hack Club is a 501(c)(3) non-profit that empowers students to
+          create technical projects. Currently with over 100,000 teenage members, our goal
+          is to help every student to be able to make incredible things all on their own.
+          We get funding from various companies such as AMD and GitHub, as well as private
+          donors to be able to offer prizes to any teen who makes awesome projects!
+        </p>
+      </div>
+
+      <div class="educator-toolkit__faq-item">
+        <h3 class="educator-toolkit__faq-question">How does it actually work?</h3>
+        <p class="educator-toolkit__faq-answer">
+          Once we launch, students will be able to log into the platform to log their
+          projects. They&rsquo;ll do this by installing our Hackatime extension that keeps
+          track of their time spent coding (or &lsquo;hacking&rsquo;). Along the way,
+          they&rsquo;ll post dev logs to Stardance showing off their project. Once
+          they&rsquo;re ready, they&rsquo;ll &ldquo;ship&rdquo; their project by publishing
+          it so anyone can see it. From this, they&rsquo;ll get tokens they can use to spend
+          in the shop for free prizes like 3d printers, electronics, plushies, and more!
+        </p>
+      </div>
+
+      <div class="educator-toolkit__faq-item">
+        <h3 class="educator-toolkit__faq-question">Is it open to beginners?</h3>
+        <p class="educator-toolkit__faq-answer">
+          Yup! We welcome both beginners and experts &mdash; there&rsquo;s no bar for entry
+          or competition to get the prizes. Plus, we have tutorials and guided projects so
+          anyone can get started making awesome websites, games, hardware, and more!
+        </p>
+      </div>
+
+      <div class="educator-toolkit__faq-item">
+        <h3 class="educator-toolkit__faq-question">What do I need to do?</h3>
+        <p class="educator-toolkit__faq-answer">
+          The best part about Stardance is that you don&rsquo;t have to do anything! All we
+          need your help with is to spread the word &mdash; otherwise, it&rsquo;s all
+          student driven, and we&rsquo;ll be here to support them every step of the way.
+          For now, though, putting up posters, sharing the video with your class, and
+          letting other teachers know will help us to give this opportunity to as many
+          teenagers as possible!
+        </p>
+      </div>
     </div>
-    <pre class="educator-toolkit__copy-block" data-educator-copy-source><%= sample_copy %></pre>
   </section>
 
   <%= render "landing/sections/footer" %>
 </div>
-
-<script>
-  (function () {
-    var root = document.querySelector("[data-educator-copy]");
-    if (!root) return;
-    var button = root.querySelector("[data-educator-copy-button]");
-    var source = root.querySelector("[data-educator-copy-source]");
-    if (!button || !source) return;
-    button.addEventListener("click", function () {
-      var text = source.textContent;
-      var done = function () {
-        var original = button.textContent;
-        button.textContent = "Copied!";
-        button.classList.add("is-copied");
-        setTimeout(function () {
-          button.textContent = original;
-          button.classList.remove("is-copied");
-        }, 2000);
-      };
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(text).then(done, function () {
-          button.textContent = "Press Ctrl/Cmd+C";
-        });
-      } else {
-        button.textContent = "Press Ctrl/Cmd+C";
-      }
-    });
-  })();
-</script>

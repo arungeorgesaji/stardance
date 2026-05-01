@@ -2,7 +2,6 @@
   color: white;
 
   --edu-container: 1100px;
-  --edu-reading: 68ch;
   --edu-section-y: clamp(1.5rem, 3vw, 2.5rem);
   --edu-section-x: clamp(1rem, 4vw, 2rem);
 
@@ -32,52 +31,12 @@
 
   &__section-title {
     font-family: var(--font-family-text);
-    font-weight: 700;
-    font-size: clamp(24px, 2.6vw, 34px);
+    font-weight: 600;
+    font-size: clamp(32px, 4vw, 48px);
     margin: 0 0 var(--space-m);
 
     &--center {
       text-align: center;
-    }
-  }
-
-  &__body {
-    font-family: var(--font-family-text);
-    font-size: clamp(15px, 1.4vw, 18px);
-    line-height: var(--line-height-body);
-
-    p {
-      margin: var(--space-m) 0;
-
-      &:first-child {
-        margin-top: 0;
-      }
-      &:last-child {
-        margin-bottom: 0;
-      }
-    }
-
-    a {
-      color: #eee7bb;
-      text-decoration: underline;
-    }
-  }
-
-  &__about,
-  &__copy {
-    max-width: var(--edu-container);
-    margin: 0 auto;
-    padding: var(--edu-section-y) var(--edu-section-x);
-  }
-
-  &__about {
-    text-align: center;
-    padding-top: var(--space-m);
-
-    .educator-toolkit__body {
-      max-width: var(--edu-reading);
-      margin: 0 auto;
-      text-align: left;
     }
   }
 
@@ -184,58 +143,56 @@
     white-space: nowrap;
   }
 
-  &__copy-header {
+  &__faq {
+    max-width: var(--edu-container);
+    margin: 0 auto;
+    padding: var(--edu-section-y) var(--edu-section-x);
+    text-align: center;
+  }
+
+  &__faq-title {
+    font-family: "Exo 2", sans-serif;
+    font-weight: 600;
+    font-size: clamp(32px, 4vw, 48px);
+    margin: 0 0 var(--space-l);
+    line-height: var(--line-height-headers);
+    margin-bottom: 3rem;
+  }
+
+  &__faq-list {
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--space-m);
-    margin-bottom: var(--space-xs);
-
-    .educator-toolkit__section-title {
-      margin: 0;
-    }
+    flex-direction: column;
+    gap: var(--space-l);
   }
 
-  &__copy-btn {
-    font-family: var(--font-family-text);
-    font-weight: 700;
-    font-size: var(--font-size-s);
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    background: #eee7bb;
-    color: #1a1608;
-    border: none;
-    border-radius: 2px;
-    padding: 0.6rem 1rem;
-    cursor: pointer;
-    transition: background 0.15s ease;
-
-    &:hover,
-    &:focus-visible {
-      background: #e0d8a8;
-      outline: none;
-    }
-
-    &.is-copied {
-      background: #9fd18c;
-      color: #0c2910;
-    }
+  &__faq-item {
+    max-width: 70ch;
+    margin: 0 auto;
   }
 
-  &__copy-block {
-    font-family:
-      "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
-    font-size: var(--font-size-s);
-    line-height: 1.55;
-    color: #f4efd4;
-    background: rgba(0, 0, 0, 0.35);
-    border: 1px solid rgba(238, 231, 187, 0.3);
-    border-radius: 4px;
-    padding: var(--space-m);
-    white-space: pre-wrap;
-    word-wrap: break-word;
-    overflow-x: auto;
+  &__faq-question {
+    font-family: "Exo 2", sans-serif;
+    font-weight: 600;
+    font-size: clamp(24px, 3vw, 40px);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    margin: 0 0 var(--space-s);
+    line-height: var(--line-height-headers);
+    text-wrap: balance;
+    margin-bottom: 2rem;
+  }
+
+  &__faq-answer {
+    font-family: "Exo 2", sans-serif;
+    font-weight: 600;
+    font-size: clamp(14px, 1.2vw, 22px);
+    line-height: 1.5;
     margin: 0;
+
+    a {
+      color: #eee7bb;
+      text-decoration: underline;
+    }
+    margin-bottom: 5rem;
   }
 }
