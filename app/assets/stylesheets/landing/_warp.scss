@@ -1,19 +1,15 @@
-// Ambient starfield + gated reveal for the landing page.
+// Gated reveal cascade for the landing hero.
 //
 // Flow:
-//   1. Inline head-script adds `html.warping` before first paint. That
+//   1. Inline head-script adds `html.warping` before first paint, which
 //      zeroes opacity on landing-header, hero content, and project row.
-//   2. The hero-warp Stimulus controller attaches, immediately swaps the
-//      class to `html.warped`, and starts an ambient GLSL starfield
-//      behind everything (z-index: -1, always on, no entrance moment).
-//   3. Under `.warped`, content reveals with a quick confident cascade
-//      (~1.2s end-to-end).
+//   2. The hero-warp Stimulus controller swaps `.warping` → `.warped` on
+//      connect.
+//   3. Under `.warped`, content reveals with a quick cascade (~1.2s).
 //
 // Fallbacks:
-//   - No JS               → `.warping` never applied, page renders normally.
-//   - No WebGL2 / reduced → controller still flips to `.warped`; canvas
-//                           skipped, reveal proceeds (shortened under
-//                           prefers-reduced-motion).
+//   - No JS                  → `.warping` never applied, page renders normally.
+//   - prefers-reduced-motion → calm simultaneous fade, no movement.
 //
 // Parallax-driven layers (earth, moon, nasa-photo) animate opacity + filter
 // only. The parallax controller writes inline transforms and would stomp
@@ -78,11 +74,8 @@ html.warped {
 
   .hero__doodle-arrow {
     animation: warp-doodle-pop 540ms cubic-bezier(0.2, 0.7, 0.2, 1) 720ms both;
-
-    @media (hover: hover) and (pointer: fine) {
-      top: 47px;
-      right: 169.6px;
-    }
+    right: calc(-420px + 30vw);
+    top: 42.4px;
   }
 
   .hero__caption {

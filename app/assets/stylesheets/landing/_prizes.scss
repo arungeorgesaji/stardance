@@ -7,29 +7,10 @@
   overflow: visible;
   overflow-x: clip;
   margin-top: var(--space-m);
-  margin-bottom: 6rem;
-
-  &__streak {
-    position: absolute;
-    top: -49.2%;
-    left: -8.2%;
-    width: 130%;
-    height: auto;
-    opacity: 0.1;
-    transform: rotate(-21.5deg);
-    pointer-events: none;
-    z-index: 0;
-
-    @media (max-width: 900px) {
-      top: -10%;
-      left: -129%;
-      width: 500%;
-    }
-  }
 
   &__text {
     position: absolute;
-    right: 14%;
+    right: 16%;
     top: 17%;
     text-align: right;
     z-index: 10;
@@ -272,33 +253,69 @@
   }
 
   @media (max-width: 600px) {
+    min-height: 640px;
+
+    &__bar {
+      min-height: 540px;
+    }
+
+    // Tighter positions so nothing overflows the 360-ish px viewport.
+    // Two-column scattered grid: bambu/switch top, airpods/camera middle,
+    // mouse/kindle/ipad bottom.
+    &__item--bambu {
+      left: 2%;
+      top: 2%;
+      width: 38%;
+    }
+
+    &__item--switch {
+      left: 42%;
+      top: 6%;
+      width: 50%;
+    }
+
     &__item--airpods {
-      top: 13.7%;
-      left: 31.6%;
+      top: 13%;
+      left: 40.8%;
       transform: rotate(-12.15deg);
-      width: 30%;
+      width: 28%;
     }
 
     &__item--camera {
-      top: 16.5%;
-      left: 67%;
+      top: 22.6%;
+      left: 73%;
+      width: 38%;
     }
 
     &__item--mouse {
-      top: 56.5%;
-      left: 1.6%;
+      top: 48.5%;
+      left: 2.8%;
+      width: 34%;
     }
 
     &__item--kindle {
-      top: 49.7%;
-      left: 35.8%;
+      top: 48.1%;
+      left: 41.3%;
+      width: 30%;
       transform: rotate(15.4deg);
     }
 
     &__item--ipad {
-      top: 59.3%;
-      left: 63%;
+      top: 54.1%;
+      left: 64.2%;
+      width: 32%;
       rotate: -10deg;
+    }
+
+    // Shift labels that were specifically overridden at 900px back into bounds
+    &__label--camera {
+      left: 66.1%;
+      top: 51.4%;
+    }
+
+    &__label--ipad {
+      left: 50%;
+      top: 102%;
     }
   }
 }

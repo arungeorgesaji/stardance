@@ -167,15 +167,6 @@
     }
   }
 
-  &__small-print {
-    font-family: "Exo 2", sans-serif;
-    font-style: italic;
-    font-size: clamp(14px, 1.1vw, 18px);
-    color: #eee7bb;
-    margin: var(--space-s) 0 0;
-    text-align: center;
-  }
-
   @media (max-width: 900px) {
     &__items {
       grid-template-columns: 1fr;

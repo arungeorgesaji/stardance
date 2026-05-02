@@ -1,6 +1,4 @@
-// Page-wide solid background lives on <html>. Body is intentionally
-// transparent so the fixed ambient starfield canvas (z-index: -1) paints
-// on top of the page bg rather than behind an opaque body box.
+// Page-wide solid background lives on <html>; body stays transparent.
 html {
   background: #08061e !important;
 }

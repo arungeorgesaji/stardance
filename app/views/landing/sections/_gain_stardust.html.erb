@@ -1,0 +1,37 @@
+<section class="gain-stardust">
+  <%= image_tag image_url("landing/how-this-works/colorful-streak.png"), class: "gain-stardust__streak", alt: "", aria: { hidden: true }, loading: "lazy" %>
+
+  <%= image_tag image_url("landing/how-this-works/decorative-curve.svg"), class: "gain-stardust__curve", alt: "", aria: { hidden: true }, loading: "lazy" %>
+
+  <h2 class="gain-stardust__title">2. Gain stardust</h2>
+
+  <div class="gain-stardust__cards">
+    <div class="gain-stardust__card gain-stardust__card--peek gain-stardust__card--0" aria-hidden="true">
+      <div class="gain-stardust__card-image-wrap">
+        <%= image_tag image_url("landing/how-this-works/card-left-bg.png"), class: "gain-stardust__card-image gain-stardust__card-image--fill", alt: "" %>
+      </div>
+    </div>
+
+    <div class="gain-stardust__card gain-stardust__card--1">
+      <img src="<%= image_url("landing/how-this-works/sparkle.svg") %>" class="gain-stardust__card-sparkle gain-stardust__card-sparkle--left" aria-hidden="true" alt="">
+      <img src="<%= image_url("landing/how-this-works/sparkle.svg") %>" class="gain-stardust__card-sparkle gain-stardust__card-sparkle--right" aria-hidden="true" alt="">
+      <h3 class="gain-stardust__card-title">Publish projects</h3>
+      <p>Ship your project into the world for others to see! Anything open-source counts.</p>
+      <%= image_tag image_url("landing/how-this-works/card-star.png"), class: "gain-stardust__card-star gain-stardust__card-star--1", alt: "", aria: { hidden: true } %>
+    </div>
+
+    <div class="gain-stardust__card gain-stardust__card--2">
+      <img src="<%= image_url("landing/how-this-works/sparkle.svg") %>" class="gain-stardust__card-sparkle gain-stardust__card-sparkle--left" aria-hidden="true" alt="">
+      <img src="<%= image_url("landing/how-this-works/sparkle.svg") %>" class="gain-stardust__card-sparkle gain-stardust__card-sparkle--right" aria-hidden="true" alt="">
+      <h3 class="gain-stardust__card-title">Get feedback</h3>
+      <p>Your project gets rated by other teens. The higher your rating, the more <strong>stardust</strong> you earn.</p>
+    </div>
+
+    <div class="gain-stardust__card gain-stardust__card--peek gain-stardust__card--3" aria-hidden="true">
+      <div class="gain-stardust__card-image-wrap">
+        <%= image_tag image_url("landing/how-this-works/card-right-bg.png"), class: "gain-stardust__card-image gain-stardust__card-image--crop", alt: "" %>
+      </div>
+      <%= image_tag image_url("landing/how-this-works/card-star.png"), class: "gain-stardust__card-star gain-stardust__card-star--3", alt: "" %>
+    </div>
+  </div>
+</section>

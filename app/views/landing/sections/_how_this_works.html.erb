@@ -1,37 +1,7 @@
 <section class="section heres-how">
+  <%= image_tag image_url("landing/weekend/top-divider.svg"), class: "heres-how__divider", alt: "", aria: { hidden: true }, loading: "lazy" %>
   <%= image_tag image_url("landing/how-this-works/nebula-bg.png"), class: "heres-how__nebula", alt: "", aria: { hidden: true }, loading: "lazy" %>
-  <%= image_tag image_url("landing/how-this-works/colorful-streak.png"), class: "heres-how__streak", alt: "", aria: { hidden: true }, loading: "lazy" %>
-  <h2 class="heres-how__title">Here's how:</h2>
 
-  <div class="heres-how__cards">
-    <div class="heres-how__card heres-how__card--peek heres-how__card--0" aria-hidden="true">
-      <div class="heres-how__card-image-wrap">
-        <%= image_tag image_url("landing/how-this-works/card-left-bg.png"), class: "heres-how__card-image heres-how__card-image--fill", alt: "" %>
-      </div>
-    </div>
-
-    <div class="heres-how__card heres-how__card--1">
-      <img src="<%= image_url("landing/how-this-works/sparkle.svg") %>" class="heres-how__card-sparkle heres-how__card-sparkle--left" aria-hidden="true" alt="">
-      <img src="<%= image_url("landing/how-this-works/sparkle.svg") %>" class="heres-how__card-sparkle heres-how__card-sparkle--right" aria-hidden="true" alt="">
-      <h3 class="heres-how__card-title">Make projects</h3>
-      <p>Build websites, games, apps, electronics, or any other open-source project that can be shared to showcase your skill.</p>
-      <%= image_tag image_url("landing/how-this-works/card-star.png"), class: "heres-how__card-star heres-how__card-star--1", alt: "", aria: { hidden: true } %>
-    </div>
-
-    <div class="heres-how__card heres-how__card--2">
-      <img src="<%= image_url("landing/how-this-works/sparkle.svg") %>" class="heres-how__card-sparkle heres-how__card-sparkle--left" aria-hidden="true" alt="">
-      <img src="<%= image_url("landing/how-this-works/sparkle.svg") %>" class="heres-how__card-sparkle heres-how__card-sparkle--right" aria-hidden="true" alt="">
-      <h3 class="heres-how__card-title">Earn prizes</h3>
-      <p>Redeem your stars for awesome prizes like raspberry pis, server hosting, 3d printers, and more to fuel your next creation.</p>
-    </div>
-
-    <div class="heres-how__card heres-how__card--peek heres-how__card--3" aria-hidden="true">
-      <div class="heres-how__card-image-wrap">
-        <%= image_tag image_url("landing/how-this-works/card-right-bg.png"), class: "heres-how__card-image heres-how__card-image--crop", alt: "" %>
-      </div>
-      <%= image_tag image_url("landing/how-this-works/card-star.png"), class: "heres-how__card-star heres-how__card-star--3", alt: "" %>
-    </div>
-  </div>
-
-  <p class="heres-how__repeat">...and repeat!</p>
+  <h2 class="heres-how__title"><span class="heres-how__title-mask">Here&rsquo;s how.</span></h2>
+  <p class="heres-how__subtitle">No judges, no winners. Just build something and get rewarded for it.</p>
 </section>
