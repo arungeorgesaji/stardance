@@ -71,6 +71,7 @@
     display: flex;
     flex-direction: column;
     gap: var(--space-m);
+    height: 100%;
   }
 
   &__resource {
@@ -108,6 +109,7 @@
       align-items: center;
       gap: var(--space-m);
       padding: var(--space-l);
+      flex: 1;
 
       @media (max-width: 520px) {
         grid-template-columns: 1fr;
