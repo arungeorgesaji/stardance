@@ -29,17 +29,6 @@
     }
   }
 
-  &__section-title {
-    font-family: var(--font-family-text);
-    font-weight: 600;
-    font-size: clamp(32px, 4vw, 48px);
-    margin: 0 0 var(--space-m);
-
-    &--center {
-      text-align: center;
-    }
-  }
-
   &__resources {
     max-width: var(--edu-container);
     margin: 0 auto;
@@ -81,6 +70,15 @@
       gap: var(--space-m);
       padding: var(--space-xl);
       min-height: 100%;
+    }
+
+    &--video {
+      padding: 0;
+      overflow: hidden;
+
+      .educator-toolkit__resource-body {
+        padding: var(--space-m) var(--space-l) var(--space-l);
+      }
     }
 
     &--compact {
@@ -133,6 +131,22 @@
     }
   }
 
+  &__video-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 6px 6px 0 0;
+    overflow: hidden;
+
+    iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+  }
+
   &__resource-action {
     font-family: var(--font-family-text);
     font-weight: 700;
@@ -143,56 +157,4 @@
     white-space: nowrap;
   }
 
-  &__faq {
-    max-width: var(--edu-container);
-    margin: 0 auto;
-    padding: var(--edu-section-y) var(--edu-section-x);
-    text-align: center;
-  }
-
-  &__faq-title {
-    font-family: "Exo 2", sans-serif;
-    font-weight: 600;
-    font-size: clamp(32px, 4vw, 48px);
-    margin: 0 0 var(--space-l);
-    line-height: var(--line-height-headers);
-    margin-bottom: 3rem;
-  }
-
-  &__faq-list {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-l);
-  }
-
-  &__faq-item {
-    max-width: 70ch;
-    margin: 0 auto;
-  }
-
-  &__faq-question {
-    font-family: "Exo 2", sans-serif;
-    font-weight: 600;
-    font-size: clamp(24px, 3vw, 40px);
-    text-decoration: underline;
-    text-underline-offset: 4px;
-    margin: 0 0 var(--space-s);
-    line-height: var(--line-height-headers);
-    text-wrap: balance;
-    margin-bottom: 2rem;
-  }
-
-  &__faq-answer {
-    font-family: "Exo 2", sans-serif;
-    font-weight: 600;
-    font-size: clamp(14px, 1.2vw, 22px);
-    line-height: 1.5;
-    margin: 0;
-
-    a {
-      color: #eee7bb;
-      text-decoration: underline;
-    }
-    margin-bottom: 5rem;
-  }
 }
