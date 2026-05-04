@@ -8,13 +8,13 @@
   <%= form_with url: rsvps_path, scope: :rsvp, method: :post, local: true do |form| %>
     <div class="rsvp-form__row">
       <%= leading %>
-      <div class="input-red">
+      <div class="input-yellow">
         <div>
           <%= form.email_field :email, placeholder: placeholder, autocomplete: "email", required: true %>
         </div>
       </div>
 
-      <%= form.button type: "submit", class: "btn btn--red btn--striped" do %>
+      <%= form.button type: "submit", class: "btn btn--yellow btn--striped" do %>
         <div>RSVP &rarr;</div>
       <% end %>
 
