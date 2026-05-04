@@ -5,23 +5,50 @@
   flex-direction: column;
   align-items: center;
   overflow-x: clip;
-  color: white;
+  color: var(--color-body-text);
   margin: 3rem 0 15rem;
 
-  // Full-bleed horizontal line with two decorative stars.
+  // Full-bleed horizontal line with two decorative sparkles. Line stretches;
+  // sparkles keep their intrinsic aspect ratio.
   &__divider {
+    position: relative;
     display: block;
     width: 100vw;
     max-width: 100%;
-    height: auto;
+    height: 32px;
+    // Nudge the divider down so its horizontal line aligns with the bottom
+    // edge of the prior section's background.
+    margin-top: var(--space-s);
     margin-bottom: 8rem;
+  }
+
+  &__divider-line {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: white;
+    transform: translateY(-50%);
+  }
+
+  // Sparkle x positions match the original svg: 220.87 / 1094.89 of 1310.
+  &__divider-sparkle {
+    position: absolute;
+    top: 50%;
+    height: 100%;
+    width: auto;
+    transform: translate(-50%, -50%);
+
+    &--left { left: 16.86%; }
+    &--right { left: 83.58%; }
   }
 
   &__moon {
     position: absolute;
-    left: 85.9%;
-    top: 131.2%;
-    transform: translateY(-50%);
+    left: 92%;
+    top: 140%;
+    transform: translateY(-50%) rotate(23deg);
     width: clamp(200px, 30vw, 400px);
     height: auto;
     pointer-events: none;
@@ -88,7 +115,8 @@
   &__title {
     font-family: "Exo 2", sans-serif;
     font-weight: 700;
-    font-size: clamp(36px, 4.4vw, 56px);
+    font-size: var(--font-h2);
+    color: white;
 
     &--italic {
       font-family: "Playfair Display", serif;
@@ -98,7 +126,7 @@
 
   &__body {
     font-weight: 400;
-    font-size: clamp(15px, 1.4vw, 18px);
+    font-size: var(--font-body);
     line-height: 1.6;
     max-width: 656px;
     margin: 0 auto;
@@ -114,12 +142,38 @@
   &__footnote {
     margin: var(--space-m) auto 0;
     text-align: center;
-    font-size: clamp(14px, 1.2vw, 16px);
-    color: #fffbe4;
+    font-size: var(--font-subtitle);
+    color: var(--color-yellow-200);
 
     a {
       color: inherit;
       text-decoration: underline;
+    }
+  }
+
+  // On narrow viewports keep all 5 nested borders, but let the stack overflow
+  // the viewport so only the inner ~3 frames are on-screen and the inner
+  // panel can claim more horizontal space for its body copy. Each border
+  // adds 12px on each side (10px padding + 2px border); pushing the stack
+  // 48px wider on each side hides --1 and --2 past the section's
+  // overflow-x: clip.
+  @media (max-width: 600px) {
+    &__card-stack {
+      // Each nested border eats 24px of width (10px padding + 2px border on
+      // each side, border-box). 60px overflow centers the stack so __inner
+      // and --4 land inside the viewport while --1, --2, --3 spill past.
+      width: calc(100% + 60px);
+      max-width: none;
+    }
+
+    &__inner {
+      padding: clamp(1.25rem, 5vw, 2rem) clamp(1rem, 4vw, 1.5rem);
+    }
+
+    // Footnote lives inside the wider card-stack but should still respect
+    // the viewport edges; cap its width to viewport minus side padding.
+    &__footnote {
+      max-width: calc(100vw - 2 * var(--space-l));
     }
   }
 }

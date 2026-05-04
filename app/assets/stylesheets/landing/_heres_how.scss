@@ -9,16 +9,50 @@
   gap: var(--space-xl);
   overflow-x: clip;
   overflow-y: visible;
-  margin-bottom: 10rem;
+  margin-bottom: 5rem;
 
+  // Title + divider share a relative wrapper so the line stays vertically
+  // centered on the heading regardless of font-size scaling.
+  &__title-row {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  // Full-bleed horizontal line with two decorative sparkles. Line stretches;
+  // sparkles keep their intrinsic aspect ratio. Sits behind the title-mask
+  // gradient so the title appears to "cut" the line.
   &__divider {
     position: absolute;
-    top: 1.5rem;
+    top: 50%;
     left: 50%;
-    width: 102.4%; // figma: 1310 / 1280
-    transform: translateX(-50%);
+    width: 100vw;
+    height: 32px;
+    transform: translate(-50%, -50%);
     pointer-events: none;
     z-index: 0;
+  }
+
+  &__divider-line {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: white;
+    transform: translateY(-50%);
+  }
+
+  &__divider-sparkle {
+    position: absolute;
+    top: 50%;
+    height: 100%;
+    width: auto;
+    transform: translate(-50%, -50%);
+
+    &--left { left: 16.86%; }
+    &--right { left: 83.58%; }
   }
 
   &__nebula {
@@ -41,7 +75,7 @@
 
   &__title {
     font-family: "Exo 2", sans-serif;
-    font-size: clamp(36px, 4.5vw, 58px);
+    font-size: var(--font-h2);
     font-weight: 700;
     color: white;
     margin: 0 auto;
@@ -68,8 +102,8 @@
 
   &__subtitle {
     font-family: "Exo 2", sans-serif;
-    font-size: clamp(16px, 1.5vw, 22px);
-    color: rgba(255, 251, 228, 0.85);
+    font-size: var(--font-body);
+    color: var(--color-body-text);
     text-align: center;
     margin: calc(-1 * var(--space-l)) auto 0;
     max-width: 720px;

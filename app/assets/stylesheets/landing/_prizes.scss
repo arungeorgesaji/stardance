@@ -11,7 +11,7 @@
   &__text {
     position: absolute;
     right: 16%;
-    top: 17%;
+    top: 8%;
     text-align: right;
     z-index: 10;
   }
@@ -19,7 +19,7 @@
   &__title {
     font-family: "Exo 2", sans-serif;
     font-weight: 700;
-    font-size: clamp(45px, 3.6vw, 56px);
+    font-size: var(--font-h2);
     color: white;
     margin: 0;
   }
@@ -27,8 +27,8 @@
   &__subtitle {
     font-family: "Exo 2", sans-serif;
     font-weight: 400;
-    font-size: clamp(17px, 1.4vw, 22px);
-    color: white;
+    font-size: var(--font-body);
+    color: var(--color-body-text);
     max-width: 22em;
     margin: 0.5em 0 0 auto;
     text-align: right;
@@ -36,7 +36,10 @@
 
   &__bar {
     position: absolute;
-    inset: 0;
+    top: var(--space-xxl);
+    bottom: calc(-1 * var(--space-xxl));
+    left: 0;
+    right: 0;
   }
 
   &__item {
@@ -60,7 +63,7 @@
     position: absolute;
     font-family: "Exo 2", sans-serif;
     font-style: italic;
-    font-size: clamp(13px, 1.15vw, 18px);
+    font-size: var(--font-subtitle);
     color: var(--color-yellow-200);
     white-space: nowrap;
     pointer-events: none;
@@ -177,9 +180,9 @@
     rotate: 14deg;
   }
 
-  @media (max-width: 900px) {
+  @media (max-width: 600px) {
     aspect-ratio: auto;
-    min-height: 520px;
+    min-height: 640px;
 
     &__text {
       position: relative;
@@ -197,65 +200,6 @@
 
     &__bar {
       position: relative;
-      min-height: 480px;
-    }
-
-    &__item--bambu {
-      left: -4%;
-      top: 0%;
-      width: 44%;
-    }
-    &__item--switch {
-      left: 38%;
-      top: 6%;
-      width: 58%;
-    }
-    &__item--camera {
-      left: 52%;
-      top: 40%;
-      width: 42%;
-    }
-    &__item--airpods {
-      left: 6%;
-      top: 40%;
-      width: 26%;
-    }
-    &__item--mouse {
-      left: -2%;
-      top: 70%;
-      width: 36%;
-    }
-    &__item--kindle {
-      left: 30%;
-      top: 64%;
-      width: 36%;
-    }
-    &__item--ipad {
-      left: 62%;
-      top: 66%;
-      width: 38%;
-    }
-
-    // Those were set manually because they were clipping under other items
-    &__label--camera {
-      left: -8.1%;
-      top: 43.2%;
-    }
-
-    &__label--ipad {
-      left: 32.9%;
-      top: 98.2%;
-    }
-
-    &__label {
-      font-size: 14px;
-    }
-  }
-
-  @media (max-width: 600px) {
-    min-height: 640px;
-
-    &__bar {
       min-height: 540px;
     }
 
@@ -307,7 +251,10 @@
       rotate: -10deg;
     }
 
-    // Shift labels that were specifically overridden at 900px back into bounds
+    &__label {
+      font-size: var(--font-subtitle);
+    }
+
     &__label--camera {
       left: 66.1%;
       top: 51.4%;
