@@ -4,8 +4,6 @@ class RsvpDailySummaryJob < ApplicationJob
   CHANNEL_ID = "C0AR0M43H61" # stardance-construction
 
   def perform
-    return unless Flipper.enabled?(:rsvp_daily_summary)
-
     since = 1.day.ago
     SendSlackDmJob.perform_later(
       CHANNEL_ID,
