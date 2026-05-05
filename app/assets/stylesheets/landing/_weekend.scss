@@ -34,8 +34,30 @@
     left: 0;
     right: 0;
     height: 1px;
-    background: white;
     transform: translateY(-50%);
+
+    // Two overlapping segments centered on the sparkle x-positions; the
+    // uniform scaleX in .divider-reveal grows the line at the same rate in
+    // both directions, with the section's overflow-x: clip trimming the
+    // overshoot.
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      background: white;
+    }
+
+    &::before {
+      left: -66.28%;
+      width: 166.28%;
+    }
+
+    &::after {
+      left: 0;
+      width: 167.16%;
+    }
   }
 
   &__divider-sparkle {

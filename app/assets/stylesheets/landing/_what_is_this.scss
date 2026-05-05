@@ -45,8 +45,33 @@
     left: 0;
     right: 0;
     height: 1px;
-    background: white;
     transform: translateY(-50%);
+
+    // Two overlapping segments, each centered on one of the sparkle
+    // x-positions and extended past the divider edges so a uniform scaleX
+    // grows the line at the same rate in both directions before the section's
+    // overflow-x: clip trims the overflow. Without the symmetric box the
+    // inward (toward-center) edge would race ahead of the outward edge.
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      background: white;
+    }
+
+    // Left star at 16.86%; mirror to the right edge gives width 166.28%.
+    &::before {
+      left: -66.28%;
+      width: 166.28%;
+    }
+
+    // Right star at 83.58%; mirror to the left edge gives width 167.16%.
+    &::after {
+      left: 0;
+      width: 167.16%;
+    }
   }
 
   // Sparkle x positions match the original svg: 220.87 / 1094.89 of 1310.

@@ -29,15 +29,29 @@ const REVEAL_SELECTORS = [
   ".cta-section__form",
 ];
 
+// Divider wrappers reveal with their own choreography (sparkles → line) — see
+// .divider-reveal in _reveal.scss. The .what-is-this__divider is handled by
+// the warp cascade on first paint, so it's intentionally excluded.
+const DIVIDER_REVEAL_SELECTORS = [
+  ".heres-how__divider",
+  ".weekend__divider",
+  ".done-before__border--top",
+  ".done-before__border--bottom",
+];
+
 export default class extends Controller {
   connect() {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     if (typeof IntersectionObserver === "undefined") return;
 
     const targets = this.element.querySelectorAll(REVEAL_SELECTORS.join(","));
-    if (targets.length === 0) return;
+    const dividerTargets = this.element.querySelectorAll(
+      DIVIDER_REVEAL_SELECTORS.join(","),
+    );
+    if (targets.length === 0 && dividerTargets.length === 0) return;
 
     for (const el of targets) el.classList.add("reveal");
+    for (const el of dividerTargets) el.classList.add("divider-reveal");
 
     this.io = new IntersectionObserver(
       (entries) => {
@@ -52,6 +66,7 @@ export default class extends Controller {
     );
 
     for (const el of targets) this.io.observe(el);
+    for (const el of dividerTargets) this.io.observe(el);
   }
 
   disconnect() {

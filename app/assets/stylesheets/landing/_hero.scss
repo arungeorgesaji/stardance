@@ -433,12 +433,6 @@ html.warped .hero__doodle-arrow.is-falling {
   right: -4.5%;
   pointer-events: none;
   z-index: 2;
-  // Hide the lower portion of the star (legs + checkmark) so it reads as
-  // peeking out from BEHIND the video's top edge. The 47% matches the
-  // geometry: with width 110 and top -52 on a 0.892-aspect image, ~47% of
-  // the star sits inside the video bounds. The pinned breakpoint (width 64,
-  // top -30) lands on the same ratio, so one value covers all sizes.
-  clip-path: inset(0 0 47% 0);
 
   @media (max-width: 900px) {
     width: 84px;
