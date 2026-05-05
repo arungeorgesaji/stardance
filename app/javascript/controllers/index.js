@@ -19,9 +19,6 @@ application.register("cookie-clicker", CookieClickerController)
 import CurveDrawController from "./curve_draw_controller"
 application.register("curve-draw", CurveDrawController)
 
-import CopyDebugController from "./copy_debug_controller"
-application.register("copy-debug", CopyDebugController)
-
 import CustomsWarningController from "./customs_warning_controller"
 application.register("customs-warning", CustomsWarningController)
 
@@ -132,9 +129,6 @@ application.register("sidebar-pin", SidebarPinController)
 
 import SnowController from "./snow_controller"
 application.register("snow", SnowController)
-
-import StatsHoverController from "./stats_hover_controller"
-application.register("stats-hover", StatsHoverController)
 
 import SuperMegaFunnelController from "./super_mega_funnel_controller"
 application.register("super-mega-funnel", SuperMegaFunnelController)

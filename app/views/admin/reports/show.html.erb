@@ -18,9 +18,6 @@
         <div class="report-user">
           <img src="<%= @report.reporter.avatar %>" alt="" class="report-avatar">
           <%= link_to @report.reporter.display_name, admin_user_path(@report.reporter) %>
-          <% if @report.reporter.slack_id.present? %>
-            <code class="report-code"><%= @report.reporter.slack_id %></code>
-          <% end %>
         </div>
       </div>
       <div class="report-detail-row">
@@ -65,9 +62,6 @@
             <div class="report-user">
               <img src="<%= owner.avatar %>" alt="" class="report-avatar">
               <%= link_to owner.display_name, admin_user_path(owner) %>
-              <% if owner.slack_id.present? %>
-                <code class="report-code"><%= owner.slack_id %></code>
-              <% end %>
             </div>
           <% else %>
             <span class="report-muted">Unknown</span>
