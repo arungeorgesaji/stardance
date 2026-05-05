@@ -16,6 +16,9 @@ application.register("card-sound", CardSoundController);
 import CookieClickerController from "./cookie_clicker_controller";
 application.register("cookie-clicker", CookieClickerController);
 
+import CountdownClockController from "./countdown_clock_controller";
+application.register("countdown-clock", CountdownClockController);
+
 import CurveDrawController from "./curve_draw_controller";
 application.register("curve-draw", CurveDrawController);
 
