@@ -1,0 +1,37 @@
+<% content_for :title, "Guides" %>
+
+<div class="guides-index">
+  <div class="guides-index__container">
+    <header class="guides-index__header">
+      <h1 class="guides-index__title">Guides</h1>
+      <p class="guides-index__subtitle">
+        Practical reads on shipping, writing a README that lands, and the other small things that make your project go further.
+      </p>
+    </header>
+
+    <% @category_order.each do |category| %>
+      <% guides = @guides_by_category[category] %>
+      <% next if guides.blank? %>
+
+      <section class="guides-index__category" aria-labelledby="cat-<%= category %>">
+        <h2 id="cat-<%= category %>" class="guides-index__category-title"><%= Guide.category_label(category) %></h2>
+
+        <div class="guides-index__grid">
+          <% guides.each do |guide| %>
+            <%= link_to guide_path(guide.slug), class: "guide-card" do %>
+              <div class="guide-card__icon" aria-hidden="true">
+                <%= inline_svg_tag "icons/#{guide.icon}.svg" %>
+              </div>
+              <div class="guide-card__body">
+                <h3 class="guide-card__title"><%= guide.title %></h3>
+                <p class="guide-card__description"><%= guide.description %></p>
+                <p class="guide-card__meta"><%= guide.reading_minutes %> min read</p>
+              </div>
+              <span class="guide-card__arrow" aria-hidden="true">→</span>
+            <% end %>
+          <% end %>
+        </div>
+      </section>
+    <% end %>
+  </div>
+</div>

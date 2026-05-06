@@ -25,6 +25,9 @@ application.register("curve-draw", CurveDrawController);
 import CustomsWarningController from "./customs_warning_controller";
 application.register("customs-warning", CustomsWarningController);
 
+import DecisionTreeController from "./decision_tree_controller";
+application.register("decision-tree", DecisionTreeController);
+
 import DialogueIterationController from "./dialogue_iteration_controller";
 application.register("dialogue-iteration", DialogueIterationController);
 

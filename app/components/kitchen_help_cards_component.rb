@@ -6,6 +6,23 @@ class KitchenHelpCardsComponent < ApplicationComponent
         div(class: "state-card state-card--neutral kitchen-help-card") do
           div(class: "state-card__status-pill") do
             div(class: "state-card__icon-circle") do
+              inline_svg_tag("icons/edit.svg", alt: "")
+            end
+          end
+          div(class: "state-card__title") { "Read the guides" }
+          div(class: "state-card__description") do
+            "Short reads on what shipping means, how to ship your kind of project, writing READMEs voters read, and more."
+          end
+          div(class: "state-card__cta") do
+            a(href: helpers.guides_path, class: "btn btn--borderless btn--bg_yellow") do
+              span { "Browse guides" }
+            end
+          end
+        end
+
+        div(class: "state-card state-card--neutral kitchen-help-card") do
+          div(class: "state-card__status-pill") do
+            div(class: "state-card__icon-circle") do
               inline_svg_tag("icons/info.svg", alt: "")
             end
           end
