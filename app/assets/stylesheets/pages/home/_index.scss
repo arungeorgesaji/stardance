@@ -1,4 +1,4 @@
-.kitchen-index {
+.home-index {
   margin: var(--space-xxxl) auto;
   max-width: 1100px;
 
@@ -55,7 +55,7 @@
     }
   }
 
-  &__ad:hover:not(:has(.kitchen-index__ad-close:hover)) &__ad-bg {
+  &__ad:hover:not(:has(.home-index__ad-close:hover)) &__ad-bg {
     box-shadow: 0 0 0 3px #ffffff;
   }
 
@@ -132,7 +132,7 @@
   }
 }
 
-.kitchen-flavortime-banner {
+.home-flavortime-banner {
   position: relative;
   display: flex;
   align-items: center;
@@ -294,7 +294,7 @@
   }
 }
 
-.kitchen-pyramid-banner {
+.home-pyramid-banner {
   position: relative;
   z-index: 2;
   display: flex;
@@ -486,7 +486,7 @@
   }
 }
 
-.kitchen-setup {
+.home-setup {
   position: relative;
   border-radius: var(--border-radius);
   padding: var(--space-xl);
@@ -642,7 +642,7 @@
   }
 }
 
-.kitchen-comic {
+.home-comic {
   margin: 2em 0;
   padding: 2em 0;
   display: flex;
@@ -758,7 +758,7 @@
   }
 }
 
-.kitchen-recently-added {
+.home-recently-added {
   margin-top: var(--space-xl);
   padding: var(--space-xl);
   background: var(--color-tan-300);
@@ -795,7 +795,7 @@
   }
 }
 
-.kitchen-open-sauce {
+.home-open-sauce {
   width: 100%;
   padding: 1em;
   background: var(--color-brown-500);
@@ -909,7 +909,7 @@
   }
 }
 
-#kitchen-opensauce-modal {
+#home-opensauce-modal {
   background: var(--color-brown-600);
   border: 0.5em solid var(--color-brown-400);
   color: var(--color-bg);

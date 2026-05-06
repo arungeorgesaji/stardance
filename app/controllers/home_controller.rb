@@ -1,9 +1,9 @@
-class KitchenController < ApplicationController
+class HomeController < ApplicationController
   prepend_before_action :load_current_user_with_identities
   before_action :require_login
 
   def index
-    authorize :kitchen, :index?
+    authorize :home, :index?
 
     identities = current_user.identities
 
@@ -33,6 +33,7 @@ class KitchenController < ApplicationController
     show_from_session = session.delete(:show_welcome_overlay)
     @show_and_tell_live = Flipper.enabled?(:show_and_tell_live)
     @show_welcome_overlay = show_from_session
+    @show_home_intro = !current_user.has_dismissed?("home_intro")
 
     if @show_welcome_overlay
       @show_hackatime_tutorial = !current_user.tutorial_step_completed?(:setup_hackatime)
@@ -90,7 +91,7 @@ class KitchenController < ApplicationController
       "details" => identity_payload["rejection_reason_details"]
     }.compact_blank.presence
   rescue StandardError => e
-    Rails.logger.warn("Kitchen HCA refresh failed: #{e.class}: #{e.message}")
+    Rails.logger.warn("Home HCA refresh failed: #{e.class}: #{e.message}")
     nil
   end
 end

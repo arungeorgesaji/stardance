@@ -2,9 +2,13 @@
   <%= render WelcomeOverlayComponent.new %>
 <% end %>
 
-<div class="kitchen-index">
-  <div class="kitchen-index__header">
-    <%= render HeadingComponent.new(title: "Kitchen", tone: :blue, size: :full) %>
+<% if @show_home_intro %>
+  <%= render HomeIntroComponent.new %>
+<% end %>
+
+<div class="home-index">
+  <div class="home-index__header">
+    <%= render HeadingComponent.new(title: "Home", tone: :blue, size: :full) %>
   </div>
 
   <% if @show_and_tell_live %>
@@ -47,16 +51,16 @@
 
   <% if @show_welcome_overlay %>
     <div class="dialogue-box-container"
-         data-controller="kitchen-dialogue"
-         data-kitchen-dialogue-show-hackatime-tutorial-value="<%= @show_hackatime_tutorial %>"
-         data-kitchen-dialogue-show-slack-tutorial-value="<%= @show_slack_tutorial %>"
+         data-controller="home-dialogue"
+         data-home-dialogue-show-hackatime-tutorial-value="<%= @show_hackatime_tutorial %>"
+         data-home-dialogue-show-slack-tutorial-value="<%= @show_slack_tutorial %>"
          style="display: none;">
       <!-- Welcome Dialogue -->
       <div class="dialogue-box-wrapper dialogue-box-wrapper--welcome"
         data-dialogue-type="welcome"
         data-dialogue-iteration-text-value='<%= [
-          "Welcome to the Kitchen, chef! This is your home base on Stardance.",
-          "The Kitchen is where you'll find your tutorial steps, track your progress, and see what you need to do next.",
+          "Welcome home, chef! This is your home base on Stardance.",
+          "This is where you'll find your tutorial steps, track your progress, and see what you need to do next.",
           "You'll see cards for each step you need to complete. Once you finish them all, you'll be fully set up and ready to cook!",
           "Let's start by checking out the tutorial steps below. They'll guide you through everything you need to know."
         ].to_json %>'
@@ -76,7 +80,7 @@
           </div>
           <div class="dialogue-box__text">
             <div class="dialogue-box__text-content">
-              <span data-dialogue-iteration-target="content">Welcome to the Kitchen, chef! This is your home base on Stardance.</span>
+              <span data-dialogue-iteration-target="content">Welcome home, chef! This is your home base on Stardance.</span>
             </div>
             <button type="button" class="dialogue-box__text-btn">
               Click to continue...<span>&#8964;</span>
@@ -131,7 +135,7 @@
           data-dialogue-iteration-text-value='<%= [
             "One more thing, chef!",
             "Join our Slack community to connect with other chefs, share your projects, and get help when you need it.",
-            "It's a great place to meet fellow builders and be part of the Stardance community!"
+            "It's a great place to meet fellow chefs and be part of the Stardance community!"
           ].to_json %>'
           data-dialogue-iteration-sprites-value='<%= (1..12).map { |i| image_path("orpheus_sprites/#{i}.png") }.to_json %>'
           data-action="keydown.enter@window->dialogue-iteration#next click@window->dialogue-iteration#next">
@@ -174,7 +178,7 @@
     </div>
   <% else %>
   <% if current_user.verification_ineligible? %>
-    <div class="kitchen-verification-notice kitchen-verification-notice--compact kitchen-verification-notice--wide">
+    <div class="home-verification-notice home-verification-notice--compact home-verification-notice--wide">
       <%= render StateCardComponent.new(
         title: "Not Eligible",
         description: "Your account has been marked as ineligible for this program. If you believe this is an error, please contact identity@hackclub.com.",
@@ -184,7 +188,7 @@
       ) %>
     </div>
   <% elsif current_user.verification_verified? && !current_user.ysws_eligible? %>
-    <div class="kitchen-verification-notice kitchen-verification-notice--compact kitchen-verification-notice--wide">
+    <div class="home-verification-notice home-verification-notice--compact home-verification-notice--wide">
       <%= render StateCardComponent.new(
         title: "Outside age range",
         description: "You're verified, but this program is only available to teenagers :-/",
@@ -194,7 +198,7 @@
       ) %>
     </div>
   <% elsif current_user.verification_needs_submission? && current_user.tutorial_step_completed?(:identity_verified) %>
-    <div class="kitchen-verification-notice kitchen-verification-notice--compact kitchen-verification-notice--wide">
+    <div class="home-verification-notice home-verification-notice--compact home-verification-notice--wide">
       <% rejection_message = [@verification_rejection_reason&.dig("reason")&.humanize, @verification_rejection_reason&.dig("details")].compact_blank.join(": ").presence %>
       <%= render StateCardComponent.new(
         title: "one more try!",
@@ -203,7 +207,7 @@
         badge_text: "action needed",
         icon: "info",
         cta_text: "verify again",
-        cta_href: HCAService.verify_portal_url(return_to: kitchen_url)
+        cta_href: HCAService.verify_portal_url(return_to: home_url)
       ) %>
     </div>
   <% end %>
@@ -222,14 +226,14 @@
     </div>
   <% end %>
 
-  <button class="kitchen-open-sauce" data-controller="modal" data-modal-target-value="kitchen-opensauce-modal" data-action="click->modal#open">
-    <%= image_tag "opensauce_left.avif", alt: "William Osman's Coke", class: "kitchen-open-sauce__left-image" %>
+  <button class="home-open-sauce" data-controller="modal" data-modal-target-value="home-opensauce-modal" data-action="click->modal#open">
+    <%= image_tag "opensauce_left.avif", alt: "William Osman's Coke", class: "home-open-sauce__left-image" %>
     <h2>Hack Club x Open Sauce</h2>
     <h3>new items <span>available!</span></h3>
-    <%= image_tag "opensauce_right.avif", alt: "William Osman's Coke", class: "kitchen-open-sauce__right-image" %>
+    <%= image_tag "opensauce_right.avif", alt: "William Osman's Coke", class: "home-open-sauce__right-image" %>
   </button>
 
-  <dialog id="kitchen-opensauce-modal" class="modal" data-controller="modal">
+  <dialog id="home-opensauce-modal" class="modal" data-controller="modal">
     <h3 class="modal__title" style="border-radius: calc(var(--border-radius)*.6);">Hack Club x Open Sauce</h3>
     <h4>
       <p>Hack Club has partnered with Open Sauce to bring you free tickets and travel scholarships to Open Sauce 2026! Get them from the shop. Bonus: You can now also buy William Osman's <a href="https://www.youtube.com/watch?v=1qzcum2P1Ko" target="_blank" rel="noopener noreferrer">pirated coke</a>!</p>
@@ -238,7 +242,7 @@
     </h4>
   </dialog>
 
-  <div class="kitchen-announcement">
+  <div class="home-announcement">
     <%= render AnnouncementComponent.new(
       image: "flavortown_apr11_sticker.avif",
       title: "Get a free sticker!",
@@ -246,49 +250,49 @@
     ) %>
   </div>
 
-  <div class="kitchen-setup">
-    <%= render KitchenTutorialStepsComponent.new(
+  <div class="home-setup">
+    <%= render HomeTutorialStepsComponent.new(
       tutorial_steps: @tutorial_steps,
       completed_steps: @completed_steps,
       current_user: current_user
     ) %>
   </div>
-  <%= link_to "https://pyramid.hackclub.com/c/flavortown/?ref=ft-dash", class: "kitchen-pyramid-banner", target: "_blank", rel: "noopener noreferrer" do %>
-    <%= image_tag "pyramid/logo.png", alt: "Pyramid Scheme icon", class: "kitchen-pyramid-banner__icon" %>
-    <span class="kitchen-pyramid-banner__copy">
-      <span class="kitchen-pyramid-banner__title">Referral Program: Pyramid Scheme</span>
-      <span class="kitchen-pyramid-banner__text">Get a Stardance referral link and invite your friends, put up posters and make videos to earn additional prizes!</span>
+  <%= link_to "https://pyramid.hackclub.com/c/flavortown/?ref=ft-dash", class: "home-pyramid-banner", target: "_blank", rel: "noopener noreferrer" do %>
+    <%= image_tag "pyramid/logo.png", alt: "Pyramid Scheme icon", class: "home-pyramid-banner__icon" %>
+    <span class="home-pyramid-banner__copy">
+      <span class="home-pyramid-banner__title">Referral Program: Pyramid Scheme</span>
+      <span class="home-pyramid-banner__text">Get a Stardance referral link and invite your friends, put up posters and make videos to earn additional prizes!</span>
     </span>
-    <span class="kitchen-pyramid-banner__cta" aria-hidden="true">↗</span>
+    <span class="home-pyramid-banner__cta" aria-hidden="true">↗</span>
   <% end %>
-  <section class="kitchen-flavortime-banner" aria-label="Flavortime">
-    <div class="kitchen-flavortime-banner__content">
-      <h2 class="kitchen-flavortime-banner__title">Flavortime <%= image_tag "flavortime/clock-icon.png", alt: "", class: "kitchen-flavortime-banner__title-icon", aria: { hidden: true } %></h2>
-      <p class="kitchen-flavortime-banner__text">Share your referral link and/or time spent coding on Discord!</p>
-      <div class="kitchen-flavortime-banner__downloads">
+  <section class="home-flavortime-banner" aria-label="Flavortime">
+    <div class="home-flavortime-banner__content">
+      <h2 class="home-flavortime-banner__title">Flavortime <%= image_tag "flavortime/clock-icon.png", alt: "", class: "home-flavortime-banner__title-icon", aria: { hidden: true } %></h2>
+      <p class="home-flavortime-banner__text">Share your referral link and/or time spent coding on Discord!</p>
+      <div class="home-flavortime-banner__downloads">
         <%= link_to flavortime_download_links[default_download_platform],
-            class: "kitchen-flavortime-banner__primary-download",
+            class: "home-flavortime-banner__primary-download",
             target: "_blank",
             rel: "noopener noreferrer" do %>
-          <svg class="kitchen-flavortime-banner__download-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></svg>
-          <span class="kitchen-flavortime-banner__download-label">Download for <%= platform_short_labels[default_download_platform] %> <span class="kitchen-flavortime-banner__download-detail">(<%= platform_details[default_download_platform] %>)</span></span>
+          <svg class="home-flavortime-banner__download-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></svg>
+          <span class="home-flavortime-banner__download-label">Download for <%= platform_short_labels[default_download_platform] %> <span class="home-flavortime-banner__download-detail">(<%= platform_details[default_download_platform] %>)</span></span>
         <% end %>
-        <p class="kitchen-flavortime-banner__download-links">
-          <span class="kitchen-flavortime-banner__download-prefix">Alternatively,</span> download for
+        <p class="home-flavortime-banner__download-links">
+          <span class="home-flavortime-banner__download-prefix">Alternatively,</span> download for
           <% other_platforms = %i[macos windows linux].reject { |p| p == default_download_platform } %>
           <% other_platforms.each_with_index do |platform, i| %>
-            <%= link_to platform_labels[platform], flavortime_download_links[platform], class: "kitchen-flavortime-banner__download-link", target: "_blank", rel: "noopener noreferrer" %>
+            <%= link_to platform_labels[platform], flavortime_download_links[platform], class: "home-flavortime-banner__download-link", target: "_blank", rel: "noopener noreferrer" %>
             <% if i < other_platforms.length - 1 %>
-              <span class="kitchen-flavortime-banner__download-separator">|</span>
+              <span class="home-flavortime-banner__download-separator">|</span>
             <% end %>
           <% end %>
         </p>
       </div>
     </div>
-    <%= image_tag "flavortime/flavortime-background.webp", alt: "Flavortime mascot", class: "kitchen-flavortime-banner__mascot" %>
+    <%= image_tag "flavortime/flavortime-background.webp", alt: "Flavortime mascot", class: "home-flavortime-banner__mascot" %>
   </section>
   <% if current_user.verification_pending? %>
-    <div class="kitchen-verification-notice kitchen-verification-notice--compact">
+    <div class="home-verification-notice home-verification-notice--compact">
       <%= render StateCardComponent.new(
         title: "Verification Pending",
         description: "Your identity verification is being reviewed. This usually takes a few days.",
@@ -300,9 +304,9 @@
   <% end %>
   <% end %>
   <% if Flipper.enabled?(:kitchen_comic, current_user) %>
-    <div class="kitchen-comic">
-      <%= image_tag "kitchen_comic/title.avif", alt: "How to Stardance", class: "kitchen-comic__title" %>
-      <div class="kitchen-comic__cards">
+    <div class="home-comic">
+      <%= image_tag "kitchen_comic/title.avif", alt: "How to Stardance", class: "home-comic__title" %>
+      <div class="home-comic__cards">
         <%= render ComicCardComponent.new(
           image: "kitchen_comic/1.avif",
           alt: "Get an idea",
@@ -311,7 +315,7 @@
           step_num: 1,
           modal_text: "<p>You can make anything — software or hardware (or both) — as long as you can track it using <a href='https://hackatime.hackclub.com' target='_blank'>Hackatime</a>, our very own software to track time spent hacking!</p>"
         ) %>
-        <%= image_tag "kitchen_comic/arrow.avif", alt: "Arrow", class: "kitchen-comic__arrow" %>
+        <%= image_tag "kitchen_comic/arrow.avif", alt: "Arrow", class: "home-comic__arrow" %>
         <%= render ComicCardComponent.new(
           image: "kitchen_comic/2.avif",
           alt: "Make your project",
@@ -320,7 +324,7 @@
           step_num: 2,
           modal_text: "<p>Set up Hackatime using <a href='https://hackatime.hackclub.com/my/wakatime_setup' target='_blank'>these</a> instructions and log your hours using devlogs — simple posts with text + images/videos that you post after making significant progress on your project. Remember to post these devlogs regularly — not posting a devlog after logging over 10 hours might result in your time being lost!</p>"
         ) %>
-        <%= image_tag "kitchen_comic/arrow.avif", alt: "Arrow", class: "kitchen-comic__arrow" %>
+        <%= image_tag "kitchen_comic/arrow.avif", alt: "Arrow", class: "home-comic__arrow" %>
         <%= render ComicCardComponent.new(
           image: "kitchen_comic/3.avif",
           alt: "Ship your project",
@@ -329,7 +333,7 @@
           step_num: 3,
           modal_text: "<p>Once your project is in a shipable state (i.e. you have a way for others to experience it through a website, app binary, etc.) — ship it! Once shipped, you must wait for your project to be approved by the <a href='https://us.review.hackclub.com' target='_blank'>Shipwrights</a>. This can take a few days (check the queue <a href='https://us.review.hackclub.com/queue' target='_blank'>here</a>) but don't worry — all they do is check if your project is shipable with the correct links, and sometimes give you helpful advice to improve it!</p><br><p>Lastly, always remember that while projects have to be demo-ready before being shipped, you can always continue working on them afterwards and re-ship.</p>"
         ) %>
-        <%= image_tag "kitchen_comic/arrow.avif", alt: "Arrow", class: "kitchen-comic__arrow" %>
+        <%= image_tag "kitchen_comic/arrow.avif", alt: "Arrow", class: "home-comic__arrow" %>
         <%= render ComicCardComponent.new(
           image: "kitchen_comic/4.avif",
           alt: "Vote on projects",
@@ -338,7 +342,7 @@
           step_num: 4,
           modal_text: "<p>You're almost ready to get Stardust for the hours you spent on your project — you just have to vote to unlock the payout! Voting is done by rating each project on a bunch of simple metrics:</p> <ul><li><b>Originality:</b> Is the project innovative and original, or just a clone of an overused concept?</li><li><b>Technical:</b> How complex is the project? Did the author use new frameworks or learn something cool?</li><li><b>Usability:</b> Is the project easy and fun to use, or is it buggy and frustrating?</li><li><b>Storytelling:</b> Does the author devlog regularly? Is the development timeline fun to scroll through?</li></ul> <p>Voting is done so people (including you) making good projects get more Stardust per hour. For every project shipped, you must vote on 14 projects to get Stardust!</p>"
         ) %>
-        <%= image_tag "kitchen_comic/arrow.avif", alt: "Arrow", class: "kitchen-comic__arrow" %>
+        <%= image_tag "kitchen_comic/arrow.avif", alt: "Arrow", class: "home-comic__arrow" %>
         <%= render ComicCardComponent.new(
           image: "kitchen_comic/5.avif",
           alt: "Earn Stardust",
@@ -347,7 +351,7 @@
           step_num: 5,
           modal_text: "<p>Congratulations! You're now ready to get Stardust for your hard work. You earn anywhere between 1 to 30 Stardust per each hour you hack on a project — the better your project does in voting, the more Stardust you get! Make sure to ship high quality projects to get bigger payouts.</p>"
         ) %>
-        <%= image_tag "kitchen_comic/arrow.avif", alt: "Arrow", class: "kitchen-comic__arrow" %>
+        <%= image_tag "kitchen_comic/arrow.avif", alt: "Arrow", class: "home-comic__arrow" %>
         <%= render ComicCardComponent.new(
           image: "kitchen_comic/6.avif",
           alt: "Win prizes",
@@ -356,20 +360,20 @@
           step_num: 6,
           modal_text: %q{<p>Once you've earned enough Stardust, you can place an order in the <a href='https://flavortown.hackclub.com/shop'>Shop</a>! You can get anything from domain grants and Raspberry Pi's to iPads and Macbooks.</p><br><p>After placing an order, you must wait again for it to be reviewed by the Fraud Squad — they just check to make sure nothing fishy is going on. Unfortunately, considering the scale at which Hack Club operates, we sometimes get bad actors trying to defraud our nonprofit, thus deeming this step necessary, especially for larger prizes. But you can rest easy — if you don't try do anything wrong, you'll never get in trouble!</p><br><p>One last thing: Hack Club always pays for shipping, but some special prizes may incur customs (a charge levied by your country's government on imported goods) if you live outside the US — which we will not be able to cover. Don't worry though, you'll know which items may incur customs during checkout so you can make an informed decision!</p>}
         ) %>
-        <%= image_tag "kitchen_comic/arrow.avif", alt: "Arrow", class: "kitchen-comic__arrow" %>
+        <%= image_tag "kitchen_comic/arrow.avif", alt: "Arrow", class: "home-comic__arrow" %>
       </div>
     </div>
   <% end %>
-  <div class="kitchen-stats">
-    <%= render KitchenStatsComponent.new(user: current_user) %>
+  <div class="home-stats">
+    <%= render HomeStatsComponent.new(user: current_user) %>
   </div>
   <% if @recently_added_items.any? %>
-    <section class="kitchen-recently-added">
-      <div class="kitchen-recently-added__header">
-        <h2 class="kitchen-recently-added__title">Recently Added to Shop</h2>
-        <p class="kitchen-recently-added__subtitle">fresh off the shelf, check these out!</p>
+    <section class="home-recently-added">
+      <div class="home-recently-added__header">
+        <h2 class="home-recently-added__title">Recently Added to Shop</h2>
+        <p class="home-recently-added__subtitle">fresh off the shelf, check these out!</p>
       </div>
-      <div class="kitchen-recently-added__items">
+      <div class="home-recently-added__items">
         <% @recently_added_items.each do |item| %>
           <% next unless item.image.present? && item.enabled_in_region?(@user_region) %>
           <% sale_price = item.price_for_region(@user_region) %>
@@ -399,7 +403,7 @@
       </div>
     </section>
   <% end %>
-  <div class="kitchen-help">
-    <%= render KitchenHelpCardsComponent %>
+  <div class="home-help">
+    <%= render HomeHelpCardsComponent %>
   </div>
 </div>

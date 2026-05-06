@@ -3,7 +3,7 @@ class LandingController < ApplicationController
     @hide_sidebar = true
 
     if current_user
-      redirect_to kitchen_path
+      redirect_to home_path
     else
       respond_to do |format|
         format.html { render :index }

@@ -269,7 +269,7 @@
           <button type="button" onclick="document.getElementById('ban-user-modal').showModal()" class="btn-danger slim">
             🚫 Ban User
           </button>
-          <%= render layout: "shared/modal", locals: { id: "ban-user-modal", title: "Ban User", description: "This will prevent #{@user.display_name} from accessing the site (except /kitchen)." } do %>
+          <%= render layout: "shared/modal", locals: { id: "ban-user-modal", title: "Ban User", description: "This will prevent #{@user.display_name} from accessing the site (except /home)." } do %>
             <form action="<%= ban_admin_user_path(@user) %>" method="post">
               <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
               <div class="modal__field">

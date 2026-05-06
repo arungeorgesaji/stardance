@@ -14,7 +14,7 @@ class User::TutorialStepsController < ApplicationController
         @completed_steps = current_user.tutorial_steps
         render turbo_stream: turbo_stream.replace(
           "tutorial-steps-container",
-          KitchenTutorialStepsComponent.new(
+          HomeTutorialStepsComponent.new(
             tutorial_steps: @tutorial_steps,
             completed_steps: @completed_steps,
             current_user: current_user

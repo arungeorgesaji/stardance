@@ -37,7 +37,7 @@
 #                                             logout DELETE /logout(.:format)                                                                                 sessions#destroy
 #                                     dev_login_auto GET    /dev_login(.:format)                                                                              sessions#dev_login
 #                                          dev_login GET    /dev_login/:id(.:format)                                                                          sessions#dev_login
-#                                            kitchen GET    /kitchen(.:format)                                                                                kitchen#index
+#                                               home GET    /home(.:format)                                                                                   home#index
 #                                        leaderboard GET    /leaderboard(.:format)                                                                            leaderboard#index
 #                                         my_balance GET    /my/balance(.:format)                                                                             my#balance
 #                                        my_settings PATCH  /my/settings(.:format)                                                                            my#update_settings
@@ -449,8 +449,8 @@ Rails.application.routes.draw do
   # OAuth callback for HCA
   # get "/oauth/callback", to: "sessions#create"
 
-  # Kitchen
-  get "kitchen", to: "kitchen#index"
+  # Home
+  get "home", to: "home#index"
 
   # Leaderboard
   get "leaderboard", to: "leaderboard#index"

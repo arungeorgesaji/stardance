@@ -1,11 +1,11 @@
-class KitchenStatsComponent < ApplicationComponent
+class HomeStatsComponent < ApplicationComponent
   def initialize(user:)
     @user = user
   end
 
   def view_template
-      h2(class: "kitchen-stats__title") { "Your Progress" }
-      div(class: "kitchen-stats__grid") do
+      h2(class: "home-stats__title") { "Your Progress" }
+      div(class: "home-stats__grid") do
         render_achievements_card
         render_leaderboard_card
       end
@@ -19,12 +19,12 @@ class KitchenStatsComponent < ApplicationComponent
     earned_count = countable.count { |a| user_achievement_slugs.include?(a.slug.to_s) }
     total_count = countable.count
 
-    div(class: "state-card state-card--neutral kitchen-stats-card") do
-      div(class: "kitchen-stats-card__content") do
+    div(class: "state-card state-card--neutral home-stats-card") do
+      div(class: "home-stats-card__content") do
         div(class: "state-card__title") { "Achievements" }
-        div(class: "kitchen-stats-card__stat") do
-          span(class: "kitchen-stats-card__count") { earned_count.to_s }
-          span(class: "kitchen-stats-card__total") { " / #{total_count}" }
+        div(class: "home-stats-card__stat") do
+          span(class: "home-stats-card__count") { earned_count.to_s }
+          span(class: "home-stats-card__total") { " / #{total_count}" }
         end
         div(class: "state-card__description") do
           if earned_count.zero?
@@ -48,21 +48,23 @@ class KitchenStatsComponent < ApplicationComponent
     rank = calculate_rank
     balance = @user.balance
 
-    div(class: "state-card state-card--neutral kitchen-stats-card") do
-      div(class: "kitchen-stats-card__content") do
+    div(class: "state-card state-card--neutral home-stats-card") do
+      div(class: "home-stats-card__content") do
         div(class: "state-card__title") { "Leaderboard" }
-        div(class: "kitchen-stats-card__stat") do
+        div(class: "home-stats-card__stat") do
           if @user.leaderboard_optin? && rank
-            span(class: "kitchen-stats-card__rank") { "You are ##{rank}" }
+            span(class: "home-stats-card__rank") { "You are ##{rank}" }
           else
-            span(class: "kitchen-stats-card__rank kitchen-stats-card__rank--unranked") { "Unranked" }
+            span(class: "home-stats-card__rank home-stats-card__rank--unranked") { "Unranked" }
           end
         end
         div(class: "state-card__description") do
           if @user.leaderboard_optin?
-            "#{balance} 🍪 earned"
+            plain "#{balance} "
+            img src: helpers.image_path("icons/stardust.png"), alt: "Stardust", class: "currency-icon"
+            plain " earned"
           else
-            "Opt in via settings to rank"
+            plain "Opt in via settings to rank"
           end
         end
       end

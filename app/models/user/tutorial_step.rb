@@ -37,7 +37,7 @@ class User
         name: "Confirm your age",
         description: "You must be a teenager to participate in Stardance",
         icon: "user",
-        link: ->(_) { HCAService.verify_portal_url(return_to: kitchen_url) }),
+        link: ->(_) { HCAService.verify_portal_url(return_to: home_url) }),
       new(slug: :setup_hackatime,
           name: "Setup Hackatime",
           description: "Start tracking your time",

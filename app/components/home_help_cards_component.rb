@@ -1,9 +1,9 @@
-class KitchenHelpCardsComponent < ApplicationComponent
+class HomeHelpCardsComponent < ApplicationComponent
   def view_template
-    div(class: "kitchen-help__content") do
-      h2(class: "kitchen-help__title") { "Need any help?" }
-      div(class: "kitchen-help__grid") do
-        div(class: "state-card state-card--neutral kitchen-help-card") do
+    div(class: "home-help__content") do
+      h2(class: "home-help__title") { "Need any help?" }
+      div(class: "home-help__grid") do
+        div(class: "state-card state-card--neutral home-help-card") do
           div(class: "state-card__status-pill") do
             div(class: "state-card__icon-circle") do
               inline_svg_tag("icons/edit.svg", alt: "")
@@ -20,7 +20,7 @@ class KitchenHelpCardsComponent < ApplicationComponent
           end
         end
 
-        div(class: "state-card state-card--neutral kitchen-help-card") do
+        div(class: "state-card state-card--neutral home-help-card") do
           div(class: "state-card__status-pill") do
             div(class: "state-card__icon-circle") do
               inline_svg_tag("icons/info.svg", alt: "")
@@ -37,7 +37,7 @@ class KitchenHelpCardsComponent < ApplicationComponent
           end
         end
 
-        div(class: "state-card state-card--neutral kitchen-help-card") do
+        div(class: "state-card state-card--neutral home-help-card") do
           div(class: "state-card__status-pill") do
             div(class: "state-card__icon-circle") do
               inline_svg_tag("icons/help.svg", alt: "")
@@ -54,7 +54,7 @@ class KitchenHelpCardsComponent < ApplicationComponent
           end
         end
       end
-      p(class: "kitchen-help__paragraph") do
+      p(class: "home-help__paragraph") do
         plain "If you're unable to use Slack, you can also send an e-mail to "
         a(href: "mailto:flavortown@hackclub.com") { "flavortown@hackclub.com" }
         plain "."

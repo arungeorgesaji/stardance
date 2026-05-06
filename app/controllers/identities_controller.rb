@@ -11,7 +11,7 @@ class IdentitiesController < ApplicationController
     uid = HackatimeService.fetch_authenticated_user(access_token) if access_token.present?
 
     if uid.blank?
-      redirect_to kitchen_path, alert: "Could not determine Hackatime user. Try again."
+      redirect_to home_path, alert: "Could not determine Hackatime user. Try again."
       return
     end
 
@@ -43,7 +43,7 @@ class IdentitiesController < ApplicationController
     #   ]
     # end
 
-    redirect_to kitchen_path, notice: "Hackatime linked!"
+    redirect_to home_path, notice: "Hackatime linked!"
   rescue ActiveRecord::RecordInvalid => e
     Rails.logger.warn("Hackatime identity save failed: #{e.record.errors.full_messages.join(", ")}")
     alert = if e.record.errors.of_kind?(:uid, :taken)
@@ -52,6 +52,6 @@ class IdentitiesController < ApplicationController
       "Failed to link Hackatime: #{e.record.errors.full_messages.first}"
     end
 
-    redirect_to kitchen_path, alert:
+    redirect_to home_path, alert:
   end
 end

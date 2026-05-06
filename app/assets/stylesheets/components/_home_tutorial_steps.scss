@@ -111,12 +111,12 @@
   pointer-events: none;
 }
 
-.kitchen-verification-notice {
+.home-verification-notice {
   &--compact {
     margin-top: var(--space-xl);
     max-width: 480px;
 
-    &.kitchen-verification-notice--wide {
+    &.home-verification-notice--wide {
       max-width: none;
       margin-top: 0;
       margin-bottom: var(--space-xl);

@@ -8,8 +8,8 @@
   <%= button_to toggle_live_admin_special_activities_path(date: params[:date]),
         method: :post,
         class: live ? "btn-danger" : "btn-primary",
-        form: { onsubmit: "return confirm('#{live ? "Turn off" : "Turn on"} the Show & Tell live banner on the Kitchen page?')" } do %>
-    <%= live ? "🔴 Show & Tell is LIVE — Click to Turn Off" : "📡 Go Live — Show Banner on Kitchen" %>
+        form: { onsubmit: "return confirm('#{live ? "Turn off" : "Turn on"} the Show & Tell live banner on the Home page?')" } do %>
+    <%= live ? "🔴 Show & Tell is LIVE — Click to Turn Off" : "📡 Go Live — Show Banner on Home" %>
   <% end %>
 </div>
 

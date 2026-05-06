@@ -128,9 +128,9 @@ class ApplicationController < ActionController::Base
 
   def enforce_ban
     return unless current_user&.banned?
-    return if controller_name == "kitchen" || controller_name == "sessions"
+    return if controller_name == "home" || controller_name == "sessions"
 
-    redirect_to kitchen_path, alert: "Your account has been banned."
+    redirect_to home_path, alert: "Your account has been banned."
   end
 
   def initialize_cache_counters

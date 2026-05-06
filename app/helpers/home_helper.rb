@@ -1,4 +1,4 @@
-module KitchenHelper
+module HomeHelper
   def id_verification_ui_for(user)
     return { variant: :danger, badge: "Unknown" } unless user
 

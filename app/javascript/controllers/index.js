@@ -58,8 +58,8 @@ application.register("hero-warp", HeroWarpController);
 import JsonHighlightController from "./json_highlight_controller";
 application.register("json-highlight", JsonHighlightController);
 
-import KitchenDialogueController from "./kitchen_dialogue_controller";
-application.register("kitchen-dialogue", KitchenDialogueController);
+import HomeDialogueController from "./home_dialogue_controller";
+application.register("home-dialogue", HomeDialogueController);
 
 import LazyLoadController from "./lazy_load_controller";
 application.register("lazy-load", LazyLoadController);

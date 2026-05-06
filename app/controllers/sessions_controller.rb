@@ -113,11 +113,11 @@ class SessionsController < ApplicationController
       apply_start_flow_data!(user)
       user.complete_tutorial_step!(:first_login)
       session[:show_welcome_overlay] = true
-      redirect_to kitchen_path
+      redirect_to home_path
       return
     end
 
-    redirect_to(user.setup_complete? ? projects_path : kitchen_path, notice: "Signed in with Hack Club")
+    redirect_to(user.setup_complete? ? projects_path : home_path, notice: "Signed in with Hack Club")
   end
 
   def destroy

@@ -1,4 +1,4 @@
-class KitchenTutorialStepsComponent < ApplicationComponent
+class HomeTutorialStepsComponent < ApplicationComponent
   include Phlex::Rails::Helpers::ButtonTo
   include Phlex::Rails::Helpers::TurboFrameTag
 
@@ -33,7 +33,7 @@ class KitchenTutorialStepsComponent < ApplicationComponent
           end
 
           p(class: "tutorial-steps__subtext") do
-            "Additional cookies are rewarded upon completion of various stages of the tutorial, so complete all 8 steps!"
+            "Additional Stardust is rewarded upon completion of various stages of the tutorial, so complete all 8 steps!"
           end
 
           div(class: "tutorial-steps__grid") do

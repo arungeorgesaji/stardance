@@ -5,7 +5,7 @@ export default class extends Controller {
     selectors: {
       type: String,
       default:
-        ".card, .btn, .sidebar, .sidebar__user-card, .sidebar__nav-link--active, .container, .state-card, .project-card, .kitchen-help-card",
+        ".card, .btn, .sidebar, .sidebar__user-card, .sidebar__nav-link--active, .container, .state-card, .project-card, .home-help-card",
     },
     chance: {
       type: Number,
