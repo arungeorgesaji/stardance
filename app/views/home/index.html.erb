@@ -59,9 +59,9 @@
       <div class="dialogue-box-wrapper dialogue-box-wrapper--welcome"
         data-dialogue-type="welcome"
         data-dialogue-iteration-text-value='<%= [
-          "Welcome home, chef! This is your home base on Stardance.",
+          "Welcome home, explorer! This is your home base on Stardance.",
           "This is where you'll find your tutorial steps, track your progress, and see what you need to do next.",
-          "You'll see cards for each step you need to complete. Once you finish them all, you'll be fully set up and ready to cook!",
+          "You'll see cards for each step you need to complete. Once you finish them all, you'll be fully set up and ready to build!",
           "Let's start by checking out the tutorial steps below. They'll guide you through everything you need to know."
         ].to_json %>'
         data-dialogue-iteration-sprites-value='<%= (1..12).map { |i| image_path("orpheus_sprites/#{i}.png") }.to_json %>'
@@ -69,18 +69,18 @@
         <div class="dialogue-box-backdrop"></div>
         <div class="dialogue-box">
           <div class="dialogue-box__header">
-            <h1>Chef Orpheus</h1>
+            <h1>Astronaut Orpheus</h1>
             <button type="button" class="dialogue-box__mute-btn" data-dialogue-iteration-target="muteButton" data-action="click->dialogue-iteration#toggleMute" aria-label="Toggle sound">
               <%= inline_svg_tag "icons/volume-on.svg", class: "dialogue-box__mute-icon", data: { dialogue_iteration_target: "volumeOnIcon" } %>
               <%= inline_svg_tag "icons/volume-off.svg", class: "dialogue-box__mute-icon", data: { dialogue_iteration_target: "volumeOffIcon" }, style: "display: none;" %>
             </button>
           </div>
           <div class="dialogue-box__image" data-action="click->dialogue-iteration#squeakCharacter" data-dialogue-iteration-target="character">
-            <%= image_tag "orpheus_sprites/1.png", alt: "Chef Orpheus", data: { dialogue_iteration_target: "sprite" } %>
+            <%= image_tag "orpheus_sprites/1.png", alt: "Astronaut Orpheus", data: { dialogue_iteration_target: "sprite" } %>
           </div>
           <div class="dialogue-box__text">
             <div class="dialogue-box__text-content">
-              <span data-dialogue-iteration-target="content">Welcome home, chef! This is your home base on Stardance.</span>
+              <span data-dialogue-iteration-target="content">Welcome home, explorer! This is your home base on Stardance.</span>
             </div>
             <button type="button" class="dialogue-box__text-btn">
               Click to continue...<span>&#8964;</span>
@@ -106,14 +106,14 @@
           <div class="dialogue-box-backdrop"></div>
           <div class="dialogue-box">
             <div class="dialogue-box__header">
-              <h1>Chef Orpheus</h1>
+              <h1>Astronaut Orpheus</h1>
               <button type="button" class="dialogue-box__mute-btn" data-dialogue-iteration-target="muteButton" data-action="click->dialogue-iteration#toggleMute" aria-label="Toggle sound">
                 <%= inline_svg_tag "icons/volume-on.svg", class: "dialogue-box__mute-icon", data: { dialogue_iteration_target: "volumeOnIcon" } %>
                 <%= inline_svg_tag "icons/volume-off.svg", class: "dialogue-box__mute-icon", data: { dialogue_iteration_target: "volumeOffIcon" }, style: "display: none;" %>
               </button>
             </div>
             <div class="dialogue-box__image" data-action="click->dialogue-iteration#squeakCharacter" data-dialogue-iteration-target="character">
-              <%= image_tag "orpheus_sprites/1.png", alt: "Chef Orpheus", data: { dialogue_iteration_target: "sprite" } %>
+              <%= image_tag "orpheus_sprites/1.png", alt: "Astronaut Orpheus", data: { dialogue_iteration_target: "sprite" } %>
             </div>
             <div class="dialogue-box__text">
               <div class="dialogue-box__text-content">
@@ -133,27 +133,27 @@
           data-dialogue-type="slack"
           style="display: none;"
           data-dialogue-iteration-text-value='<%= [
-            "One more thing, chef!",
-            "Join our Slack community to connect with other chefs, share your projects, and get help when you need it.",
-            "It's a great place to meet fellow chefs and be part of the Stardance community!"
+            "One more thing, explorer!",
+            "Join our Slack community to connect with other explorers, share your projects, and get help when you need it.",
+            "It's a great place to meet fellow explorers and be part of the Stardance community!"
           ].to_json %>'
           data-dialogue-iteration-sprites-value='<%= (1..12).map { |i| image_path("orpheus_sprites/#{i}.png") }.to_json %>'
           data-action="keydown.enter@window->dialogue-iteration#next click@window->dialogue-iteration#next">
           <div class="dialogue-box-backdrop"></div>
           <div class="dialogue-box">
             <div class="dialogue-box__header">
-              <h1>Chef Orpheus</h1>
+              <h1>Astronaut Orpheus</h1>
               <button type="button" class="dialogue-box__mute-btn" data-dialogue-iteration-target="muteButton" data-action="click->dialogue-iteration#toggleMute" aria-label="Toggle sound">
                 <%= inline_svg_tag "icons/volume-on.svg", class: "dialogue-box__mute-icon", data: { dialogue_iteration_target: "volumeOnIcon" } %>
                 <%= inline_svg_tag "icons/volume-off.svg", class: "dialogue-box__mute-icon", data: { dialogue_iteration_target: "volumeOffIcon" }, style: "display: none;" %>
               </button>
             </div>
             <div class="dialogue-box__image" data-action="click->dialogue-iteration#squeakCharacter" data-dialogue-iteration-target="character">
-              <%= image_tag "orpheus_sprites/1.png", alt: "Chef Orpheus", data: { dialogue_iteration_target: "sprite" } %>
+              <%= image_tag "orpheus_sprites/1.png", alt: "Astronaut Orpheus", data: { dialogue_iteration_target: "sprite" } %>
             </div>
             <div class="dialogue-box__text">
               <div class="dialogue-box__text-content">
-                <span data-dialogue-iteration-target="content">One more thing, chef!</span>
+                <span data-dialogue-iteration-target="content">One more thing, explorer!</span>
               </div>
               <button type="button" class="dialogue-box__text-btn">
                 Click to continue...<span>&#8964;</span>

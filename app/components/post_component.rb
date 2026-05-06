@@ -143,7 +143,7 @@ class PostComponent < ViewComponent::Base
 
   def author_activity
     if fire_event?
-      "sent their compliments to the chef of"
+      "tagged ⭐ on"
     elsif ship_event?
       "shipped"
     elsif git_commit?

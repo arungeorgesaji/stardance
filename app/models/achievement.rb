@@ -13,31 +13,31 @@ Achievement = Data.define(:slug, :name, :description, :icon, :earned_check, :pro
   ALL = [
     new(
       slug: :first_login,
-      name: "Anyone Can Cook!",
-      description: "welcome to the kitchen, chef",
+      name: "Welcome Aboard",
+      description: "welcome to Stardance, explorer",
       icon: "chepheus",
       earned_check: ->(user) { user.persisted? }
     ),
     new(
       slug: :identity_verified,
-      name: "Very Fried",
-      description: "prove you belong in this kitchen!",
+      name: "Cleared for Launch",
+      description: "cleared by mission control!",
       icon: "verified",
       earned_check: ->(user) { user.identity_verified? },
       stardust_reward: 5
     ),
     new(
       slug: :first_project,
-      name: "Home Cookin'",
-      description: "fire up the stove and start your first dish",
+      name: "Liftoff",
+      description: "lift off with your first project",
       icon: "fork_spoon_fill",
       earned_check: ->(user) { user.projects.exists? },
       stardust_reward: 3
     ),
     new(
       slug: :first_devlog,
-      name: "Recipe Notes",
-      description: "jot down your cooking process",
+      name: "Mission Log",
+      description: "log your first mission update",
       icon: "edit",
       earned_check: ->(user) { user.projects.joins(:posts).exists?(posts: { postable_type: "Post::Devlog" }) },
       stardust_reward: 2
@@ -51,7 +51,7 @@ Achievement = Data.define(:slug, :name, :description, :icon, :earned_check, :pro
     ),
     new(
       slug: :first_order,
-      name: "Off the Menu",
+      name: "First Buy",
       icon: "shopping_cart_1_fill",
       description: "treat yourself to something from the shop",
       earned_check: ->(user) { user.shop_orders.joins(:shop_item).where.not(shop_item: { type: "ShopItem::FreeStickers" }).exists? }
@@ -60,14 +60,14 @@ Achievement = Data.define(:slug, :name, :description, :icon, :earned_check, :pro
       slug: :five_orders,
       name: "Regular Customer",
       icon: "shopping",
-      description: "5 orders in - the kitchen knows your name now",
+      description: "5 orders in - we know your name now",
       earned_check: ->(user) { user.shop_orders.real.worth_counting.count >= 5 },
       progress: ->(user) { { current: user.shop_orders.real.worth_counting.count, target: 5 } }
     ),
     new(
       slug: :ten_orders,
-      name: "VIP Diner",
-      description: "10 orders?! we're naming a dish after you",
+      name: "Big Spender",
+      description: "10 orders?! we're naming a project after you",
       icon: "shopping_cart_1_fill",
       earned_check: ->(user) { user.shop_orders.real.worth_counting.count >= 10 },
       progress: ->(user) { { current: user.shop_orders.real.worth_counting.count, target: 10 } }
@@ -81,14 +81,14 @@ Achievement = Data.define(:slug, :name, :description, :icon, :earned_check, :pro
     ),
     new(
       slug: :flavortown_chatter,
-      name: "Kitchen slacker",
+      name: "Slacker",
       description: "joined the conversation in #flavortown",
       icon: "slack",
       earned_check: ->(user) { SlackChannelService.user_has_posted_in?(user, :flavortown) }
     ),
     new(
       slug: :flavortown_introduced,
-      name: "Hello, Kitchen!",
+      name: "Hello, Galaxy!",
       description: "introduced yourself in #flavortown-introduction",
       icon: "user",
       earned_check: ->(user) { SlackChannelService.user_has_posted_in?(user, :flavortown_introduction) },
@@ -96,8 +96,8 @@ Achievement = Data.define(:slug, :name, :description, :icon, :earned_check, :pro
     ),
     new(
       slug: :five_projects,
-      name: "Line Cook",
-      description: "5 dishes cooking at once? mise en place!",
+      name: "Constellation",
+      description: "5 projects forming a constellation!",
       icon: "square_fill",
       earned_check: ->(user) { user.projects.count >= 5 },
       progress: ->(user) { { current: user.projects.count, target: 5 } },
@@ -105,7 +105,7 @@ Achievement = Data.define(:slug, :name, :description, :icon, :earned_check, :pro
     ),
     new(
       slug: :first_ship,
-      name: "Order Up!",
+      name: "Maiden Voyage",
       description: "ship your first project to the world",
       icon: "ship",
       earned_check: ->(user) { user.projects.where(ship_status: "submitted").exists? },
@@ -113,16 +113,16 @@ Achievement = Data.define(:slug, :name, :description, :icon, :earned_check, :pro
     ),
     new(
       slug: :ship_certified,
-      name: "Michelin Star",
-      description: "your dish has been certified by the critics",
+      name: "Gold Star",
+      description: "your project has been certified by the reviewers",
       icon: "trophy",
       earned_check: ->(user) { Post::ShipEvent.joins(:post).where(posts: { user_id: user.id }, certification_status: "approved").exists? },
       stardust_reward: 3
     ),
     new(
       slug: :ten_devlogs,
-      name: "Cookbook Author",
-      description: "10 recipes documented - publish that cookbook!",
+      name: "Captain's Log",
+      description: "10 entries logged - keep recording your missions!",
       icon: "fire",
       earned_check: ->(user) { Post.joins(:project).where(projects: { id: user.project_ids }, postable_type: "Post::Devlog").count >= 10 },
       progress: ->(user) { { current: Post.joins(:project).where(projects: { id: user.project_ids }, postable_type: "Post::Devlog").count, target: 10 } },
@@ -131,8 +131,8 @@ Achievement = Data.define(:slug, :name, :description, :icon, :earned_check, :pro
     ),
     new(
       slug: :cooking,
-      name: "Cooking",
-      description: "Cooked so hard you ended up making a fire project that made our staff very happy!",
+      name: "Super Star",
+      description: "Built something so good our staff marked your project as a Super Star ⭐!",
       icon: "fire",
       earned_check: ->(user) { user.projects.fire.exists? },
       stardust_reward: 5,
@@ -193,8 +193,8 @@ Achievement = Data.define(:slug, :name, :description, :icon, :earned_check, :pro
     ),
     new(
       slug: :five_certified_ships,
-      name: "Five Star Chef",
-      description: "5 certified ships - the critics can't stop raving!",
+      name: "Five Star Builder",
+      description: "5 certified ships - the reviewers can't stop raving!",
       icon: "trophy",
       earned_check: ->(user) {
         Post::ShipEvent.joins(:post)
@@ -219,8 +219,8 @@ Achievement = Data.define(:slug, :name, :description, :icon, :earned_check, :pro
     ),
     new(
       slug: :fifty_hours,
-      name: "Sous Chef",
-      description: "50 hours in the kitchen - You're locked in i see...",
+      name: "Locked In",
+      description: "50 hours in orbit - you're really locked in!",
       icon: "fire",
       earned_check: ->(user) { user.devlog_seconds_total >= 50 * 3600 },
       progress: ->(user) { { current: (user.devlog_seconds_total / 3600.0).floor, target: 50 } },
@@ -228,8 +228,8 @@ Achievement = Data.define(:slug, :name, :description, :icon, :earned_check, :pro
     ),
     new(
       slug: :hundred_hours,
-      name: "Chef who cooked",
-      description: "100 hours of pure dedication - please, touch grass!",
+      name: "Built Different",
+      description: "100 hours of pure dedication - please, return to Earth!",
       icon: "fire",
       earned_check: ->(user) { user.devlog_seconds_total >= 100 * 3600 },
       progress: ->(user) { { current: (user.devlog_seconds_total / 3600.0).floor, target: 100 } },
@@ -293,14 +293,14 @@ Achievement = Data.define(:slug, :name, :description, :icon, :earned_check, :pro
   def has_stardust_reward? = stardust_reward.positive?
 
   SECRET_DESCRIPTIONS = [
-    "the secret ingredient is... secret",
-    "something's cooking... 👀",
-    "this recipe is under wraps",
-    "only the head chef knows this one",
-    "a mystery dish awaits...",
-    "keep stirring the pot to find out!",
-    "classified kitchen intel 🤫",
-    "shhh... it's marinating"
+    "the secret to this one is... secret",
+    "something's brewing... 👀",
+    "this one's under wraps",
+    "only the team knows this one",
+    "a mystery awaits...",
+    "keep building to find out!",
+    "classified intel 🤫",
+    "shhh... it's in the works"
   ].freeze
 
   def display_name(earned:)

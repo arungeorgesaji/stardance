@@ -5,7 +5,7 @@ module OgImage
     }.freeze
 
     def initialize
-      super(title: "I'm cooked!")
+      super(title: "Stardance")
     end
   end
 end

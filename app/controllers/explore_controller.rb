@@ -43,7 +43,7 @@ class ExploreController < ApplicationController
                    .where(tutorial: false)
                    .excluding_member(current_user)
 
-    scope = scope.fire if params[:sort] == "well-cooked"
+    scope = scope.fire if params[:sort] == "super-star"
 
     if params[:sort] == "following" && current_user
       scope = scope.where(id: current_user.project_follows.select(:project_id)).order(created_at: :desc)

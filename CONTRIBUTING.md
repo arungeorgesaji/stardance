@@ -1,5 +1,5 @@
 # Setting up a development environment
-Heidi, it's time to cook! 🧑‍🍳
+Heidi, we're ready for launch! 🚀
 
 You'll need Docker Compose, Ruby, and Rails to run Stardance. We strongly encourage using a Unix-based system (Linux or macOS). If you're on Windows, check out [GitHub Codespaces](https://github.com/codespaces)!
 
@@ -81,7 +81,7 @@ You'll need Docker Compose, Ruby, and Rails to run Stardance. We strongly encour
 
     If you're using `nano`, press <kbd>CTRL</kbd> + <kbd>S</kbd> to save, then <kbd>CTRL</kbd> + <kbd>X</kbd> to exit.
 
-8. It's time to cook! Run `bin/dev`! 
+8. It's time to launch! Run `bin/dev`! 
 
 ## Starting the development environment back up again
 If you already did all of the steps above previously, but e.g. your PC or Codespace restarted, you only need to do a subset of the steps above.
@@ -101,4 +101,4 @@ If you already did all of the steps above previously, but e.g. your PC or Codesp
     bundle install
     ```
 
-4. It's time to cook! Run `bin/dev`! 
+4. It's time to launch! Run `bin/dev`! 

@@ -42,20 +42,20 @@
       end
 
       if current_page?(explore_gallery_path)
-        sort_options << { label: "Well Cooked", value: "#{base_path}?sort=well-cooked" }
+        sort_options << { label: "Super Star", value: "#{base_path}?sort=super-star" }
       end
 
       selected_label = case params[:sort]
                          when "top" then "Top"
                          when "following" then "Following"
-                         when "well-cooked" then "Well Cooked"
+                         when "super-star" then "Super Star"
                          else "Newest"
                        end
 
       sort_color = case selected_label
                      when "Top" then :red
                      when "Following" then :blue
-                     when "Well Cooked" then :brown
+                     when "Super Star" then :brown
                      else :green
                    end
     %>
@@ -63,7 +63,7 @@
       label: "Sort",
       options: sort_options,
       selected_option: selected_label,
-      longest_option_string: "Well Cooked",
+      longest_option_string: "Super Star",
       color: sort_color
     ) %>
   </div>

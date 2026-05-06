@@ -37,7 +37,7 @@
 
       <% if helpers.current_user.present? && helpers.policy(:admin).manage_projects? %>
         <%= render ButtonComponent.new(
-            text: project.fire? ? "Unmark as Well Cooked" : "Mark as Well Cooked",
+            text: project.fire? ? "Unmark as Super Star" : "Mark as Super Star",
             color: :green,
             icon: "icons/fire.svg",
             class: "project-show-card__fire-btn",

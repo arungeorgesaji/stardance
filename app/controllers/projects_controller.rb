@@ -190,22 +190,22 @@ class ProjectsController < ApplicationController
     return render(json: { message: "Project not found" }, status: :not_found) unless @project
 
     if @project.users.include?(current_user)
-      return render(json: { message: "You cannot mark your own project as well cooked." }, status: :forbidden)
+      return render(json: { message: "You cannot mark your own project as a Super Star." }, status: :forbidden)
     end
 
     if current_user.fraud_dept? && !current_user.admin?
       if @project.users.any? { |u| u.fraud_dept? }
-        return render(json: { message: "You cannot mark a fellow fraud department member's project as well cooked." }, status: :forbidden)
+        return render(json: { message: "You cannot mark a fellow fraud department member's project as a Super Star." }, status: :forbidden)
       end
     end
 
     PaperTrail.request(whodunnit: current_user.id) do
       fire_event = Post::FireEvent.create(
-        body: "🔥 #{current_user.display_name} marked your project as well cooked! As a prize for your nicely cooked project, look out for a bonus prize in the mail :)"
+        body: "⭐ #{current_user.display_name} marked your project as a Super Star! As a prize for your great work, look out for a bonus prize in the mail :)"
       )
 
       unless fire_event.persisted?
-        render json: { message: fire_event.errors.full_messages.to_sentence.presence || "Failed to mark project as 🔥" }, status: :unprocessable_entity
+        render json: { message: fire_event.errors.full_messages.to_sentence.presence || "Failed to mark project as a Super Star" }, status: :unprocessable_entity
         next
       end
 
@@ -232,15 +232,15 @@ class ProjectsController < ApplicationController
         @project.users.each do |user|
           SendSlackDmJob.perform_later(
             user.slack_id,
-            blocks_path: "notifications/projects/well_cooked",
+            blocks_path: "notifications/projects/super_star",
             locals: { project: @project }
           )
         end
 
-        render json: { message: "Project marked as 🔥!", fire: true }, status: :ok
+        render json: { message: "Project marked as ⭐!", fire: true }, status: :ok
       else
         errors = (post.errors.full_messages + fire_event.errors.full_messages).uniq
-        render json: { message: errors.to_sentence.presence || "Failed to mark project as 🔥" }, status: :unprocessable_entity
+        render json: { message: errors.to_sentence.presence || "Failed to mark project as a Super Star" }, status: :unprocessable_entity
       end
     end
   end
@@ -263,7 +263,7 @@ class ProjectsController < ApplicationController
         }
       )
 
-      render json: { message: "Project unmarked as 🔥", fire: false }, status: :ok
+      render json: { message: "Project unmarked as Super Star", fire: false }, status: :ok
     end
   end
 

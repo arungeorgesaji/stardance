@@ -22,7 +22,7 @@ class User
       new(:first_login, "First login", "Log into the platform for the first time!", "user", "/"),
       new(slug: :create_project,
           name: "Create your first project",
-          description: "What are you cooking?",
+          description: "What are you building?",
           icon: "fork_spoon_fill",
           link: ->(_) { new_project_path }),
       new(slug: :post_devlog,

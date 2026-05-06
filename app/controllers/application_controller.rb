@@ -87,7 +87,7 @@ class ApplicationController < ActionController::Base
   end
 
   def user_not_authorized(exception)
-    @error_title = "Whoa there, chef!"
+    @error_title = "Whoa there, explorer!"
     @error_message = exception.message.presence || "You don't have the right ingredients to access this page."
     @back_path = safe_referrer
 

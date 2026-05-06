@@ -17,7 +17,7 @@ me and the homies love docker, and it makes it stupid simple, so its highly reco
    docker compose up -d db
    ```
 
-3. now to start cookin, run this and it will boot up rails
+3. now to start building, run this and it will boot up rails
 
    ```bash
    docker compose run --service-ports web /bin/bash
