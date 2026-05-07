@@ -1,0 +1,62 @@
+<dialog class="command-palette"
+        id="command-palette-dialog"
+        data-controller="command-palette"
+        data-action="cancel->command-palette#handleCancel click->command-palette#backdropClick"
+        aria-label="Command palette"
+        aria-modal="true">
+
+  <%= form_with url: commands_path, method: :get,
+        data: { turbo_frame: "command_palette_results" },
+        class: "command-palette__form" do |f| %>
+    <div class="command-palette__search-row"
+         data-action="input->command-palette#scheduleSubmit keydown->command-palette#handleKey">
+      <%= helpers.inline_svg_tag "icons/search.svg", class: "command-palette__search-icon", aria: { hidden: true } %>
+      <%= f.search_field :q,
+            placeholder: "Search anything or type a command...",
+            autocomplete: "off",
+            class: "command-palette__input",
+            data: { "command-palette-target": "input" },
+            aria: { label: "Search anything or type a command", autocomplete: "list",
+                    controls: "command_palette_results", activedescendant: "" } %>
+    </div>
+  <% end %>
+
+  <%= helpers.turbo_frame_tag "command_palette_results", class: "command-palette__results", role: "listbox" do %>
+    <p class="command-palette__section-label">Commands</p>
+    <ul class="command-palette__list">
+      <% initial_commands.each_with_index do |cmd, i| %>
+        <li class="command-palette__item"
+            role="option"
+            id="cp-item-<%= i %>"
+            data-command-palette-target="item"
+            data-action="click->command-palette#select mouseenter->command-palette#highlight"
+            data-path="<%= cmd.path %>">
+          <% if cmd.icon %>
+            <span class="command-palette__item-icon" aria-hidden="true">
+              <%= helpers.inline_svg_tag "icons/#{cmd.icon}.svg", class: "command-palette__icon" %>
+            </span>
+          <% end %>
+          <span class="command-palette__item-title"><%= cmd.title %></span>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <div class="command-palette__footer">
+    <div class="command-palette__footer-hints">
+      <span class="command-palette__footer-hint">
+        <kbd class="command-palette__kbd">↑</kbd>
+        <kbd class="command-palette__kbd">↓</kbd>
+        to navigate
+      </span>
+      <span class="command-palette__footer-hint">
+        <kbd class="command-palette__kbd">↵</kbd>
+        to select
+      </span>
+      <span class="command-palette__footer-hint">
+        <kbd class="command-palette__kbd">esc</kbd>
+        to close
+      </span>
+    </div>
+  </div>
+</dialog>

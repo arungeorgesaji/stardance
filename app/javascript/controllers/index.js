@@ -16,6 +16,9 @@ application.register("bio-editor", BioEditorController)
 import CardSoundController from "./card_sound_controller"
 application.register("card-sound", CardSoundController)
 
+import CommandPaletteController from "./command_palette_controller"
+application.register("command-palette", CommandPaletteController)
+
 import CountdownClockController from "./countdown_clock_controller"
 application.register("countdown-clock", CountdownClockController)
 

@@ -1,0 +1,180 @@
+.command-palette {
+  border: none;
+  border-radius: var(--border-radius);
+  padding: 0;
+  background: var(--color-space-bg-2);
+  max-width: min(640px, 90vw);
+  width: 100%;
+  position: fixed;
+  top: 12vh;
+  left: 50%;
+  translate: -50% 0;
+  margin: 0;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.08);
+
+  &::backdrop {
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(2px);
+  }
+
+  &__form {
+    background: var(--color-space-bg, var(--color-brown-700));
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  &__search-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-s);
+    padding: var(--space-m) var(--space-l);
+  }
+
+  &__search-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    flex-shrink: 0;
+    color: var(--color-space-text, var(--color-bg));
+    opacity: 0.6;
+  }
+
+  &__input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--color-space-text, var(--color-bg));
+    font-family: var(--font-family-sans);
+    font-size: var(--font-size-l);
+
+    &::placeholder {
+      color: var(--color-space-text, var(--color-bg));
+      opacity: 0.45;
+    }
+  }
+
+  &__results {
+    background: var(--color-space-bg, var(--color-brown-700));
+    border-radius: 0;
+    max-height: 50vh;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 4px;
+    }
+  }
+
+  &__section-label {
+    padding: var(--space-s) var(--space-l) var(--space-xs);
+    margin: 0;
+    color: var(--color-space-text, var(--color-bg));
+    font-family: var(--font-family-sans);
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    opacity: 0.45;
+  }
+
+  &__list {
+    list-style: none;
+    padding: 0 0 var(--space-xs);
+    margin: 0;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-s);
+    padding: var(--space-s) var(--space-l);
+    cursor: pointer;
+    color: var(--color-space-text, var(--color-bg));
+    font-family: var(--font-family-sans);
+    font-size: var(--font-size-m);
+    transition: background-color 100ms ease;
+    border-radius: var(--border-radius-s);
+    margin: 0 var(--space-xs);
+
+    &:hover,
+    &--active {
+      background: rgba(255, 255, 255, 0.08);
+      box-shadow: inset 3px 0 0 var(--color-space-accent, var(--color-tan-300));
+    }
+  }
+
+  &__item-icon {
+    display: grid;
+    place-items: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    flex-shrink: 0;
+    opacity: 0.75;
+  }
+
+  &__icon {
+    width: 100%;
+    height: 100%;
+    color: var(--color-space-accent, var(--color-tan-300));
+  }
+
+  &__item-title {
+    flex: 1;
+  }
+
+  &__empty {
+    padding: var(--space-l);
+    text-align: center;
+    color: var(--color-space-text, var(--color-bg));
+    opacity: 0.5;
+    font-family: var(--font-family-sans);
+    font-size: var(--font-size-s);
+  }
+
+  &__footer {
+    background: var(--color-space-bg, var(--color-brown-700));
+    border-radius: 0 0 var(--border-radius) var(--border-radius);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding: var(--space-s) var(--space-l);
+  }
+
+  &__footer-hints {
+    display: flex;
+    align-items: center;
+    gap: var(--space-m);
+  }
+
+  &__footer-hint {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    color: var(--color-space-text, var(--color-bg));
+    font-family: var(--font-family-sans);
+    font-size: var(--font-size-xs);
+    opacity: 0.5;
+  }
+
+  &__kbd {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.4em;
+    padding: 0.1em 0.35em;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 4px;
+    font-family: var(--font-family-sans);
+    font-size: var(--font-size-xs);
+    line-height: 1.4;
+    color: var(--color-space-text, var(--color-bg));
+  }
+}
